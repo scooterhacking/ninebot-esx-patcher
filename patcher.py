@@ -71,8 +71,7 @@ class FirmwarePatcher():
         self.ks = keystone.Ks(keystone.KS_ARCH_ARM, keystone.KS_MODE_THUMB)
 
     def encrypt(self):
-        cry = XiaoTea()
-        self.data = cry.encrypt(self.data)
+        self.data = XiaoTea().encrypt(self.data)
 
     def kers_min_speed(self, kmh):
         val = struct.pack('<H', int(kmh * 345))

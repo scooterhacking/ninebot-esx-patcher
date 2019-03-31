@@ -3,20 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="author" content="BotoX">
-<meta name="description" content="Xiaomi Mijia M365 Custom Firmware Toolkit">
+<meta name="description" content="Ninebot ES/SNSC Custom Firmware Toolkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-<title>Xiaomi Mijia M365 Custom Firmware Toolkit</title>
+<link rel="icon" type="image/png" href="static/favicon.png">
+<link rel="stylesheet" type="text/css" href="static/style.css">
+<title>Ninebot ES/SNSC Custom Firmware Toolkit</title>
 </head>
 
 <body>
 
 <div class="header">
-    <h1>Xiaomi Mijia M365 Custom Firmware Toolkit</h1>
-    <a href="https://hackm365.com/">Spanish</a>
-    <a href="https://spzjulien.com/CFW/">French</a>
-    <a href="http://cfw.rollerplausch.com/">German</a>
+    <h1>Ninebot ES/SNSC Custom Firmware Toolkit</h1>
 </div>
 
 <div class="content">
@@ -30,10 +27,10 @@
 <p>
     Presets:
     <button onclick="Preset_Default();">Default</button>
-    <button onclick="Preset_Mine();">Mine</button>
-    <button onclick="Preset_CFWW();">CFW W</button>
-    <button onclick="Preset_Rollerplausch();">Rollerplausch.com</button>
-    <button onclick="Preset_DYoC();">DYoC</button>
+    <button onclick="Preset_Mine();">1</button>
+    <button onclick="Preset_CFWW();">2</button>
+    <button onclick="Preset_Rollerplausch();">3</button>
+    <button onclick="Preset_DYoC();">4</button>
 </p>
 
 <noscript>This website (despite it's look) requires some very simple JavaScript which is embedded in this HTML.</noscript>
@@ -44,126 +41,40 @@
     <li><p>
         Base version of your firmware:
         <select name="version">
-            <option value="DRV143">1.4.3</option>
-            <option value="DRV142">1.4.2</option>
-            <option value="DRV141">1.4.1</option>
-            <option value="DRV140">1.4.0</option>
-            <option value="DRV138" selected>1.3.8</option>
-            <option value="DRV134">1.3.4</option>
-            <option value="DRV130">1.3.0</option>
+            <option value="DRV120">1.2.0</option>
+            <option value="DRV133" selected>1.3.3</option>
         </select>
         <br>
-        1.3.8 is recommended over 1.4.0, it provides a much smoother riding experience.
+        1.3.3 is recommended over 1.2.0, because you won't need to downgrade the BMS.
     </p></li>
 
     <li><p>
-        KERS min speed:
+        KERS dividor:
         <input name="kers_min_speed" type="number" step="0.1" min="0" max="100" value="6.0" disabled>
         <label><input type="checkbox" onchange="CheckForm('kers_min_speed', this);">Patch?</label>
         <br>
-        Speed in km/h at which the scooter will start braking on it's own when the engine is not active.<br>
-        You will still have recuperative braking when using the brake lever.<br>
-        If you want "KERS OFF" then just put this to 40km/h.
+        Divide KERS strengh.<br>
     </p></li>
 
     <li><p>
-        Maximum speed in Normal mode:
-        <input name="normal_max_speed" type="number" step="1" min="0" max="100" value="28" disabled>
+        Maximum speed:
+        <input name="normal_max_speed" type="number" step="1" min="0" max="100" value="32" disabled>
         <label><input type="checkbox" onchange="CheckForm('normal_max_speed', this);">Patch?</label>
         <br>
-        The scooter will stay below this, add +1 to actually drive this fast.
+        The scooter will stay below this speed. Use it if you're running at limited speed even in Sport mode.
     </p></li>
 
-    <li><p>
-        Maximum speed in ECO mode:
-        <input name="eco_max_speed" type="number" step="1" min="0" max="100" value="22" disabled>
-        <label><input type="checkbox" onchange="CheckForm('eco_max_speed', this);">Patch?</label>
-        <br>
-        The scooter will stay below this, add +1 to actually drive this fast.
-    </p></li>
-
-    <li><p>
-        Motor start speed:
-        <input name="motor_start_speed" type="number" step="0.01" min="0" max="100" value="5.0" disabled>
-        <label><input type="checkbox" onchange="CheckForm('motor_start_speed', this);">Patch?</label>
-        <br>
-        Minimum speed in km/h before the engine will start.
-    </p></li>
 
     <li><p>
         Motor power constant:
         <input name="motor_power_constant" type="number" step="1" min="20000" max="65535" value="51575" disabled>
         <label><input type="checkbox" onchange="CheckForm('motor_power_constant', this);">Patch?</label>
         <br>
-        Lower = More power. Too much power is not recommended for battery and motor life, stay above 32000.<br>
-        Original = 51575, DYoC = 40165, CFW2.0Weak = 27877, CFW2.0 = 25787
+        Lower = More power. Too much power is not recommended for battery and motor life.<br>
+        Modifying this value will surely break your scooter.
     </p></li>
 
-    <li><p>
-        Cruise control delay:
-        <input name="cruise_control_delay" type="number" step="0.1" min="0.1" max="20" value="5.0" disabled>
-        <label><input type="checkbox" onchange="CheckForm('cruise_control_delay', this);">Patch?</label>
-        <br>
-        How many seconds it takes for cruise control to kick in.
-    </p></li>
 
-    <li><p>
-        Instant mode switch:
-        <label><input type="checkbox" name="instant_eco_switch"></label>
-        <br>
-        Switch instantly between ECO and Normal mode while driving.
-    </p></li>
-
-    <li><p>
-        Boot with ECO mode:
-        <label><input type="checkbox" name="boot_with_eco"></label>
-        <br>
-        The scooter will always start in ECO mode.
-    </p></li>
-
-    <li><p>
-        Russian throttle algorithm (from CFW):
-        <label><input type="checkbox" name="russian_throttle"></label>
-        <br>
-        Changes the throttle algorithm from speed-control to power-control.
-    </p></li>
-
-    <li><p>
-        Battery voltage limit:
-        <input name="voltage_limit" type="number" step="0.01" min="43.01" max="63.00" value="43.01" disabled>
-        <label><input type="checkbox" onchange="CheckForm('voltage_limit', this);">Patch?</label>
-        <br>
-        If you want to connect a custom battery with a higher voltage.
-    </p></li>
-
-    <li><p>
-        Remove hard speed limit of 35km/h:
-        <label><input type="checkbox" name="remove_hard_speed_limit"></label>
-        <br>
-        Removes code which checks that the speed is below 34.78km/h (12000/345).
-    </p></li>
-
-    <li><p>
-        Remove charging mode:
-        <label><input type="checkbox" name="remove_charging_mode"></label>
-        <br>
-        Fixes issue of scooter going into charge mode with an external battery connected in parallel.
-    </p></li>
-
-    <li><p>
-        Change ESC<->BMS baud rate to 76800:
-        <label><input type="checkbox" name="bms_uart_76800"></label>
-        <br>
-        Only if you use the <a href="https://github.com/BotoX/xiaomi-m365-compatible-bms" target="_blank">compatible open source BMS</a>!<br>
-    </p></li>
-
-    <li><p>
-        Wheel speed multiplier:
-        <input name="wheel_speed_const" type="number" step="1" min="200" max="500" value="345" disabled>
-        <label><input type="checkbox" onchange="CheckForm('wheel_speed_const', this);">Patch?</label>
-        <br>
-        For 10" wheels use 315, don't change otherwise.
-    </p></li>
 </ul>
 <hr>
 
@@ -178,15 +89,16 @@
 
 <p>
     <b><span style="color: red;">&#9888;&nbsp;NEW </span>The tool now makes .zip files with both encrypted and unencrypted firmware and an info.txt inside.</b><br>
-    <b><span style="color: red;">&#9888;&nbsp;NEW </span>Use the following app made by <a href="https://github.com/CamiAlfa">CamiAlfa</a> to flash your modified firmware: <a href="https://play.google.com/store/apps/details?id=com.m365downgrade">m365 DownG</a></b><br>
-    It will automatically chose the correct firmware for your scooter. Don't try to flash the .zip file with the old patched app!
+    <b><span style="color: red;">&#9888;&nbsp;NEW </span>Use the following Windows app made by majsi to flash your modified firmware: <a href="https://www.microsoft.com/en-us/p/ninebot-flasher/9p5hws0hq55s?activetab=pivot:overviewtab">Ninebot-Flasher</a></b><br>
 </p>
 
 <hr>
 <p>
-    Source code on GitHub: <a href="https://github.com/BotoX/xiaomi-m365-firmware-patcher" target="_blank">https://github.com/BotoX/xiaomi-m365-firmware-patcher</a>
+    Source code on GitHub: <a href="https://github.com/scooterhacking/ninebot-es-snsc-firmware-patcher" target="_blank">https://github.com/scooterhacking/ninebot-es-snsc-firmware-patcher</a>
     <br>
-    <b>Donate: <a href="https://paypal.me/BotoXbz" target="_blank">https://paypal.me/BotoXbz</a></b>
+    <b>Donate to majsi (CFW scripting): <a href="#" target="_blank">to be added</a><br />
+	Donate to ScooterHacking.org (host and maintainer): <a href="#" target="_blank">to be added</a><br />
+	Donate to Botox: <a href="https://paypal.me/BotoXbz" target="_blank">https://paypal.me/BotoXbz</a></b>
 </p>
 </div>
 
@@ -412,5 +324,7 @@
         document.body.removeChild(textArea);
     }
 </script>
-
+<script type="text/javascript">
+alert("Don't get too excited, it's not working yet.");
+</script>
 </body>

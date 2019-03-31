@@ -39,13 +39,13 @@ def home():
 @app.route('/cfw')
 def patch_firmware():
     version = flask.request.args.get('version', None)
-    if version not in ['DRV130', 'DRV134', 'DRV138', 'DRV140', 'DRV141', 'DRV142', 'DRV143']:
+    if version not in ['DRV120', 'DRV133']:
         return 'Invalid firmware version.', 400
 
-    with open('../bins/{}.bin'.format(version), 'rb') as fp:
+    with open('/root/9botcfw/bins/{}.bin'.format(version), 'rb') as fp:
         patcher = FirmwarePatcher(fp.read())
 
-    kers_min_speed = flask.request.args.get('kers_min_speed', None)
+    kers_min_speed = flask.request.args.get('kers_dividor', None)
     if kers_min_speed is not None:
         kers_min_speed = float(kers_min_speed)
         assert kers_min_speed >= 0 and kers_min_speed <= 100
@@ -149,4 +149,4 @@ def patch_firmware():
     return resp
 
 if __name__ == '__main__':
-    app.run('0.0.0.0')
+    app.run('5.39.31.97')
