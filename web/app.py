@@ -97,7 +97,7 @@ def patch_firmware():
     md5e = hashlib.md5()
     md5e.update(patcher.data)
 
-    info_txt = 'dev: ES/SNSC;\nname: {};\nenc: B;\ntyp: DRV;\nmd5: {};\nmd5e: {};\n'.format(
+    info_txt = 'dev: ES/SNSC;\nnam: {};\nenc: B;\ntyp: DRV;\nmd5: {};\nmd5e: {};\n'.format(
         version, md5.hexdigest(), md5e.hexdigest())
 
     zip_file.writestr('info.txt', info_txt.encode())
