@@ -45,29 +45,26 @@ def patch_firmware():
     with open('/root/9botcfw/bins/{}.bin'.format(version), 'rb') as fp:
         patcher = FirmwarePatcher(fp.read())
 
-    kers_min_speed = flask.request.args.get('kers_dividor', None)
+    kers_min_speed = flask.request.args.get('kers_min_speed', None)
     if kers_min_speed is not None:
-        kers_min_speed = float(kers_min_speed)
+        kers_min_speed = int(kers_min_speed)
         assert kers_min_speed >= 0 and kers_min_speed <= 100
         patcher.kers_min_speed(kers_min_speed)
 
-    normal_max_speed = flask.request.args.get('normal_max_speed', None)
-    if normal_max_speed is not None:
-        normal_max_speed = int(normal_max_speed)
-        assert normal_max_speed >= 0 and normal_max_speed <= 100
-        patcher.normal_max_speed(normal_max_speed)
+    kers_dividor = flask.request.args.get('kers_dividor', None)
+    if kers_dividor is not None:
+        kers_dividor = int(kers_dividor)
+        assert kers_dividor >= 0 and kers_dividor <= 100
+        if kers_dividor == 2:
+           patcher.kers_dividor_2()		
+        if kers_dividor == 6:
+           patcher.kers_dividor_6()
 
-    eco_max_speed = flask.request.args.get('eco_max_speed', None)
-    if eco_max_speed is not None:
-        eco_max_speed = int(eco_max_speed)
-        assert eco_max_speed >= 0 and eco_max_speed <= 100
-        patcher.eco_max_speed(eco_max_speed)
-
-    motor_start_speed = flask.request.args.get('motor_start_speed', None)
-    if motor_start_speed is not None:
-        motor_start_speed = float(motor_start_speed)
-        assert motor_start_speed >= 0 and motor_start_speed <= 100
-        patcher.motor_start_speed(motor_start_speed)
+    max_speed = flask.request.args.get('max_speed', None)
+    if max_speed is not None:
+        max_speed = int(max_speed)
+        assert max_speed >= 0 and max_speed <= 100
+        patcher.max_speed(max_speed)
 
     motor_power_constant = flask.request.args.get('motor_power_constant', None)
     if motor_power_constant is not None:
@@ -77,45 +74,15 @@ def patch_firmware():
 
     cruise_control_delay = flask.request.args.get('cruise_control_delay', None)
     if cruise_control_delay is not None:
-        cruise_control_delay = float(cruise_control_delay)
-        assert cruise_control_delay >= 0.1 and cruise_control_delay <= 20.0
+        cruise_control_delay = int(cruise_control_delay)
+        assert cruise_control_delay >= 0 and cruise_control_delay <= 100
         patcher.cruise_control_delay(cruise_control_delay)
 
-    instant_eco_switch = flask.request.args.get('instant_eco_switch', None)
-    if instant_eco_switch:
-        patcher.instant_eco_switch()
+    version_spoofing = flask.request.args.get('version_spoofing', None)
+    if version_spoofing:
+         #patcher.version_spoofing()
+         print("todo!")
 
-    boot_with_eco = flask.request.args.get('boot_with_eco', None)
-    if boot_with_eco:
-        patcher.boot_with_eco()
-
-    voltage_limit = flask.request.args.get('voltage_limit', None)
-    if voltage_limit is not None:
-        voltage_limit = float(voltage_limit)
-        assert voltage_limit >= 43.01 and voltage_limit <= 63.00
-        patcher.voltage_limit(voltage_limit)
-
-    russian_throttle = flask.request.args.get('russian_throttle', None)
-    if russian_throttle:
-        patcher.russian_throttle()
-
-    remove_hard_speed_limit = flask.request.args.get('remove_hard_speed_limit', None)
-    if remove_hard_speed_limit:
-        patcher.remove_hard_speed_limit()
-
-    remove_charging_mode = flask.request.args.get('remove_charging_mode', None)
-    if remove_charging_mode:
-        patcher.remove_charging_mode()
-
-    bms_uart_76800 = flask.request.args.get('bms_uart_76800', None)
-    if bms_uart_76800:
-        patcher.bms_uart_76800()
-
-    wheel_speed_const = flask.request.args.get('wheel_speed_const', None)
-    if wheel_speed_const:
-        wheel_speed_const = int(wheel_speed_const)
-        assert wheel_speed_const >= 200 and wheel_speed_const <= 500
-        patcher.wheel_speed_const(wheel_speed_const)
 
     # make zip file for firmware
     zip_buffer = io.BytesIO()
@@ -130,11 +97,12 @@ def patch_firmware():
     md5e = hashlib.md5()
     md5e.update(patcher.data)
 
-    info_txt = 'dev: M365;\nnam: {};\nenc: B;\ntyp: DRV;\nmd5: {};\nmd5e: {};\n'.format(
+    info_txt = 'dev: ES/SNSC;\nname: {};\nenc: B;\ntyp: DRV;\nmd5: {};\nmd5e: {};\n'.format(
         version, md5.hexdigest(), md5e.hexdigest())
 
     zip_file.writestr('info.txt', info_txt.encode())
-    zip_file.comment = flask.request.url.encode()
+    message = "Downloaded from https://ninebot.scooterhacking.org Share this CFW with the following link : "
+    zip_file.comment = bytes(message, 'utf-8') + flask.request.url.encode()
     zip_file.close()
     zip_buffer.seek(0)
     content = zip_buffer.getvalue()
@@ -149,4 +117,4 @@ def patch_firmware():
     return resp
 
 if __name__ == '__main__':
-    app.run('5.39.31.97')
+    app.run('0.0.0.0')
