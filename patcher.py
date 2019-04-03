@@ -73,21 +73,21 @@ class FirmwarePatcher():
 
     def encrypt(self):
         self.data = XiaoTea.XiaoTea().encrypt(self.data)
-
+    #@author : majsi
     def kers_min_speed(self, kmh):
         val = struct.pack('<H', int(kmh * 390))
         sig = [0x25, 0x68, 0x40, 0xF6, 0x24, 0x17, 0xBD, 0x42]
         ofs = FindPattern(self.data, sig) + 2
         pre, post = PatchImm(self.data, ofs, 4, val, MOVW_T3_IMM)
         return [(ofs, pre, post)]
-
+    #@author : majsi
     def normal_max_speed(self, kmh):
         val = struct.pack('<B', int(kmh))
         sig = [0x04, 0xE0, 0x21, 0x85, 0x1C, 0x21, 0xE1, 0x83]
         ofs = FindPattern(self.data, sig) + 4
         pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
         return [(ofs, pre, post)]
-
+    #@author : majsi
     def kers_dividor_6(self):
         sig = [0x00, 0xEB, 0x40, 0x00, 0x40, 0x00, None, None, 0x00, 0xEB, 0x40, 0x00]
         ofs = FindPattern(self.data, sig)
@@ -99,7 +99,7 @@ class FirmwarePatcher():
         post = bytes(self.ks.asm(asm)[0])
         self.data[ofs:ofs + 6] = post
         return [(ofs, pre, post)]
-		
+	#@author : majsi	
     def kers_dividor_2(self):
         sig = [0x00, 0xEB, 0x80, 0x00, 0x80, 0x00, 0xC0, 0x0A]
         ofs = FindPattern(self.data, sig) + 6
@@ -110,7 +110,7 @@ class FirmwarePatcher():
         post = bytes(self.ks.asm(asm)[0])
         self.data[ofs:ofs + 2] = post
         return [(ofs, pre, post)]
-		
+	#@author : majsi	
     def max_speed(self, kmh):
         ret = []
         val = struct.pack('<B', int(kmh))
@@ -124,8 +124,19 @@ class FirmwarePatcher():
         pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
 
         ret.append((ofs, pre, post))
+
+        if self.data[0x7BAA] == 0x33 and self.data[0x7BAB] == 0x11:
+            sig = [None, 0xF8, 0x2E, 0xE0, 0x22, 0x20, 0xE0, 0x83, 0x1B, 0xE0, 0x95]
+            ofs = FindPattern(self.data, sig) + 4
+            pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
+        else:
+            sig = [0x52, 0xC0, 0x4F, 0xF0, 0x22, 0x0E, 0x4C, 0xF2, 0x50, 0x38, 0xBC]
+            ofs = FindPattern(self.data, sig) + 4
+            pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
+
+        ret.append((ofs, pre, post))
         return ret
-		
+	#@author : majsi	
     def cruise_control_delay(self, delay):
         delay = int(delay * 200)
         assert delay.bit_length() <= 12, 'bit length overflow'
@@ -142,6 +153,7 @@ class FirmwarePatcher():
     # DYoC = 40165 (~650 Watt)
     # CFW W = 27877 (~850 Watt)
     # CFW = 25787 (~1000 Watt)
+	#@author : majsi
     def motor_power_constant(self, val):
         val = struct.pack('<H', int(val))
         ret = []
