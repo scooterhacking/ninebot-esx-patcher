@@ -110,6 +110,13 @@ class FirmwarePatcher():
         post = bytes(self.ks.asm(asm)[0])
         self.data[ofs:ofs + 2] = post
         return [(ofs, pre, post)]
+	#@author : majsi
+    def alt_throttle_alg(self):
+        sig = [0xF0, 0xB5, 0x25, 0x4A, 0x00, 0x24, 0xA2, 0xF8, 0xEC, 0x40, 0x24, 0x49]
+        ofs = FindPattern(self.data, sig) + 4
+        pre, post = self.data[ofs:ofs + 1], bytearray((0x01, 0x24))
+        self.data[ofs:ofs + 2] = post
+        return [(ofs, pre, post)]
 	#@author : majsi	
     def max_speed(self, kmh):
         ret = []

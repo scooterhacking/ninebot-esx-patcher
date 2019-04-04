@@ -77,6 +77,10 @@ def patch_firmware():
         cruise_control_delay = int(cruise_control_delay)
         assert cruise_control_delay >= 0 and cruise_control_delay <= 100
         patcher.cruise_control_delay(cruise_control_delay)
+		
+    throttle_alg = flask.request.args.get('throttle_alg', None)
+    if throttle_alg:
+        patcher.alt_throttle_alg()
 
     version_spoofing = flask.request.args.get('version_spoofing', None)
     if version_spoofing:

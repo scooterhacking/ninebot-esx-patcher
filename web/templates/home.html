@@ -71,7 +71,7 @@
         <input name="max_speed" type="number" step="1" min="0" max="45" value="32" disabled>
         <label><input type="checkbox" onchange="CheckForm('max_speed', this);">Patch?</label>
         <br>
-        The scooter will stay below this speed. Use it if you're running at limited speed even in Sport mode. <b><font color="orange">New!</font></b>
+        The scooter will stay below this speed. Use it if you're running at limited speed even in Sport mode. 
     </p></li>
 
     <li><p>
@@ -79,7 +79,7 @@
         <input name="cruise_control_delay" type="number" step="1" min="1" max="100" value="5" disabled>
         <label><input type="checkbox" onchange="CheckForm('cruise_control_delay', this);">Patch?</label>
         <br>
-        How many seconds it takes for cruise control to kick in. <b><font color="blue">Experimental!</font></b>
+        How many seconds it takes for cruise control to kick in.
     </p></li>	
 
     <li><p>
@@ -87,6 +87,13 @@
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
         Makes the version number higher to prevent updates from the Ninebot app. <font color="red">Soon!</font>
+    </p></li>
+	
+    <li><p>
+        Alternative throttle algorithm:
+        <label><input type="checkbox" name="throttle_alg"></label>
+        <br>
+        Uses the alternative throttle algorithm. <b><font color="orange">New!</font></b>
     </p></li>
 	
     <li><p>
@@ -136,7 +143,8 @@
         "MAX_SPEED": "max_speed",
         "VERSION_SPOOFING": "version_spoofing",
         "MOTOR_POWER_CONSTANT": "motor_power_constant",
-		"CRUISE_CONTROL_DELAY": "cruise_control_delay"
+		"CRUISE_CONTROL_DELAY": "cruise_control_delay",
+		"THROTTLE_ALG": "throttle_alg"
     };
 
     var formValues = Object.values(forms);
@@ -214,6 +222,7 @@
         ChangeForm(forms.MOTOR_POWER_CONSTANT, "51575", false);
 		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
         ChangeForm(forms.VERSION_SPOOFING, false);
+		ChangeForm(forms.THROTTLE_ALG, false);
     }
 
 
