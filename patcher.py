@@ -99,7 +99,25 @@ class FirmwarePatcher():
         post = bytes(self.ks.asm(asm)[0])
         self.data[ofs:ofs + 6] = post
         return [(ofs, pre, post)]
-	#@author : majsi	
+	#@author : majsi
+    def motor_start_speed(self, kmh):
+        ret = []
+        val = int(kmh * 390)
+        val = val - (val % 16)
+        assert val.bit_length() <= 12, 'bit length overflow'
+        sig = [0x4B, 0x01, None, None, 0x48, 0x00, None, None, None, 0xB6, 0xF5, 0xC3, 0x6F, 0x0D, 0xDD]
+        ofs = FindPattern(self.data, sig) + 9
+        pre = self.data[ofs:ofs + 4]
+        post = bytes(self.ks.asm('CMP.W R6, #{:n}'.format(val))[0])
+        self.data[ofs:ofs + 4] = post
+        ret.append((ofs, pre, post))
+        ofs += 4
+
+        pre, post = self.data[ofs:ofs + 1], bytearray((0x0D, 0xDB))
+        self.data[ofs:ofs + 2] = post
+        ret.append((ofs, pre, post))
+        return ret
+	#@author : majsi
     def kers_dividor_2(self):
         sig = [0x00, 0xEB, 0x80, 0x00, 0x80, 0x00, 0xC0, 0x0A]
         ofs = FindPattern(self.data, sig) + 6

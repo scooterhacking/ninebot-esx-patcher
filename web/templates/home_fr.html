@@ -41,9 +41,11 @@
         <select name="version">
             <option value="DRV120">1.2.0</option>
             <option value="DRV133" selected>1.3.3</option>
+			<option value="DRV139">1.3.9 (expérimental)</option>
+			<option value="DRV147">1.4.7 (très expérimental)</option>
         </select>
         <br>
-        La 1.3.3 est recommandée, puisqu'elle ne nécessitera sûrement pas un downgrade BMS.
+        La 1.3+ est recommandée, puisqu'elle ne nécessitera sûrement pas un downgrade BMS.
     </p></li>
 
     <li><p>
@@ -78,8 +80,16 @@
         <label><input type="checkbox" onchange="CheckForm('cruise_control_delay', this);">Modifier?</label>
         <br>
         Combien de secondes avant l'activation du régulateur. 
-    </p></li>	
-
+    </p></li>
+	
+    <li><p>
+        Vitesse de démarrage du moteur:
+        <input name="motor_start_speed" type="number" step="1" min="0" max="10" value="5" disabled>
+        <label><input type="checkbox" onchange="CheckForm('motor_start_speed', this);">Patch?</label>
+        <br>
+        Vitesse minimum en km/h avant que le moteur fonctionne. <b><font color="orange">Nouveau!</font></b>
+    </p></li>
+	
     <li><p>
         Changement de version:
         <label><input type="checkbox" name="version_spoofing"></label>
@@ -91,7 +101,7 @@
         Algorithme d'accélération alternatif:
         <label><input type="checkbox" name="throttle_alg"></label>
         <br>
-        Utilisez l'algorithme d'accélération alternatif, change la manière dont la gâchette réagit. <b><font color="orange">Nouveau!</font></b>
+        Utilisez l'algorithme d'accélération alternatif, change la manière dont la gâchette réagit.
     </p></li>
 	
     <li><p>
@@ -142,7 +152,8 @@
         "VERSION_SPOOFING": "version_spoofing",
         "MOTOR_POWER_CONSTANT": "motor_power_constant",
 		"CRUISE_CONTROL_DELAY": "cruise_control_delay",
-		"THROTTLE_ALG": "throttle_alg"
+		"THROTTLE_ALG": "throttle_alg",
+		"MOTOR_START_SPEED": "motor_start_speed"
     };
 
     var formValues = Object.values(forms);
@@ -221,6 +232,7 @@
 		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
         ChangeForm(forms.VERSION_SPOOFING, false);
 		ChangeForm(forms.THROTTLE_ALG, false);
+		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
     }
 
 
@@ -269,8 +281,5 @@
 
         document.body.removeChild(textArea);
     }
-</script>
-<script type="text/javascript">
-alert("Attention, cet outil est encore expérimental!");
 </script>
 </body>

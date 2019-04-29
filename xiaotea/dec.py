@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from sys import argv, exit
 from os.path import getsize
-from xiaotea import XiaoTea
+from XiaoTea import XiaoTea
 
 if len(argv) != 3:
     exit('Usage: ' + argv[0] + ' <infile> <outfile>')

@@ -39,7 +39,7 @@ def home():
 @app.route('/cfw')
 def patch_firmware():
     version = flask.request.args.get('version', None)
-    if version not in ['DRV120', 'DRV133']:
+    if version not in ['DRV120', 'DRV133', 'DRV139', 'DRV147']:
         return 'Invalid firmware version.', 400
 
     with open('/root/9botcfw/bins/{}.bin'.format(version), 'rb') as fp:
@@ -77,6 +77,12 @@ def patch_firmware():
         cruise_control_delay = int(cruise_control_delay)
         assert cruise_control_delay >= 0 and cruise_control_delay <= 100
         patcher.cruise_control_delay(cruise_control_delay)
+
+    motor_start_speed = flask.request.args.get('motor_start_speed', None)
+    if motor_start_speed is not None:
+        motor_start_speed = int(motor_start_speed)
+        assert motor_start_speed >= 0 and motor_start_speed <= 10
+        patcher.motor_start_speed(motor_start_speed)
 		
     throttle_alg = flask.request.args.get('throttle_alg', None)
     if throttle_alg:
@@ -105,7 +111,7 @@ def patch_firmware():
         version, md5.hexdigest(), md5e.hexdigest())
 
     zip_file.writestr('info.txt', info_txt.encode())
-    message = "Downloaded from https://ninebot.scooterhacking.org Share this CFW with the following link : "
+    message = "Downloaded from https://ninebot.scooterhacking.org - Share this CFW with the following link : "
     zip_file.comment = bytes(message, 'utf-8') + flask.request.url.encode()
     zip_file.close()
     zip_buffer.seek(0)
