@@ -90,8 +90,7 @@ def patch_firmware():
 
     version_spoofing = flask.request.args.get('version_spoofing', None)
     if version_spoofing:
-         #patcher.version_spoofing()
-         print("todo!")
+         patcher.version_spoofing(version)
 
 
     # make zip file for firmware

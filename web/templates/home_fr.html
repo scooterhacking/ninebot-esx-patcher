@@ -42,7 +42,7 @@
             <option value="DRV120">1.2.0</option>
             <option value="DRV133" selected>1.3.3</option>
 			<option value="DRV139">1.3.9 (expérimental)</option>
-			<option value="DRV147">1.4.7 (très expérimental)</option>
+			<option value="DRV147" disabled="disabled">1.4.7 (désactivé)</option>
         </select>
         <br>
         La 1.3+ est recommandée, puisqu'elle ne nécessitera sûrement pas un downgrade BMS.
@@ -87,14 +87,15 @@
         <input name="motor_start_speed" type="number" step="1" min="0" max="10" value="5" disabled>
         <label><input type="checkbox" onchange="CheckForm('motor_start_speed', this);">Modifier?</label>
         <br>
-        Vitesse minimum en km/h avant que le moteur fonctionne. <b><font color="orange">Nouveau!</font></b>
+        Vitesse minimum en km/h avant que le moteur fonctionne. 
     </p></li>
 	
     <li><p>
         Changement de version:
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
-        Change le numéro de version dans l'application Ninebot pour éviter l'écrasement du CFW. <font color="red">Bientôt!</font>
+        Change le numéro de version dans l'application Ninebot pour éviter l'écrasement du CFW. <b><font color="orange">Nouveau!</font></b> <br />
+        <i>Fonctionne seulement pour les versions 1.3+</i>
     </p></li>
 	
     <li><p>

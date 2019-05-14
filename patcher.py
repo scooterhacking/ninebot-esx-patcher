@@ -73,6 +73,14 @@ class FirmwarePatcher():
 
     def encrypt(self):
         self.data = XiaoTea.XiaoTea().encrypt(self.data)
+    #@author : ScooterHacking
+    def version_spoofing(self, DRV_version):
+        if DRV_version == "DRV133" or DRV_version == "DRV139" or DRV_version == "DRV147":
+            val = b'\x50'
+            sig = [0x74, 0x01, 0x40, 0xF2, None, 0x10]
+            ofs = FindPattern(self.data, sig) + 5
+            pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
+            return [(ofs, pre, post)]
     #@author : majsi
     def kers_min_speed(self, kmh):
         val = struct.pack('<H', int(kmh * 390))
