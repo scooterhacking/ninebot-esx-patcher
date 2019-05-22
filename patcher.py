@@ -231,23 +231,18 @@ if __name__ == "__main__":
 
     cfw = FirmwarePatcher(data)
 
-    cfw.kers_min_speed(45)
-    cfw.normal_max_speed(35)
-    cfw.eco_max_speed(26)
-    cfw.voltage_limit(52)
-    cfw.motor_start_speed(3)
-    cfw.motor_power_constant(40000)
-    cfw.instant_eco_switch()
-    #cfw.boot_with_eco()
+    cfw.version_spoofing()
+    cfw.kers_min_speed(6)
+    cfw.max_speed(32)
+    #cfw.kers_dividor_6()
+    cfw.motor_start_speed(6)
+    #cfw.kers_dividor_2()
+    #cfw.alt_throttle_alg()
     #cfw.cruise_control_delay(5)
-    cfw.remove_hard_speed_limit()
-    #cfw.remove_charging_mode()
-    #cfw.bms_uart_76800()
-    #cfw.russian_throttle()
-    #cfw.wheel_speed_const(315)
+    #cfw.motor_power_constant(48000)
+    
 
-    # Don't flash encrypted firmware to scooter running firmware < 1.4.1
-    #cfw.encrypt()
+    cfw.encrypt()
 
     with open(sys.argv[2], 'wb') as fp:
         fp.write(cfw.data)
