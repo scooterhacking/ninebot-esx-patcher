@@ -13,10 +13,10 @@
 <body>
 
 <div class="header">
-	<p><a href="https://www.scooterhacking.org">Return to ScooterHacking.org</a> - <a href="https://sctrhck.ml/discord">Join our Discord server</a> - <a href="https://ninebot.scooterhacking.org/fr">Version française</a>
+	<p><a href="https://www.scooterhacking.org">Return to ScooterHacking.org</a> - <a href="https://sctrhck.ml/discord">Join our Discord server</a>
     <h1>Ninebot ES/SNSC Custom Firmware Toolkit</h1>
-</div>
-
+	<b>[<a href="https://ninebot.scooterhacking.org/"><img src="static/us-icon.png" /></a>]</b> - <a href="https://ninebot.scooterhacking.org/fr"><img src="static/fr-icon.png" /></a> - <a href="https://ninebot.scooterhacking.org/ru"><img src="static/ru-icon.png" /></a>
+	</div>
 <div class="content">
 <p>
     Configure your own custom firmware by adjusting the options below.<br>
@@ -31,12 +31,14 @@
 <p>
     Presets:
     <button onclick="Preset_Default();">Default</button>
+	<button onclick="Preset_SH();">SH</button>
+	<button onclick="Preset_Sport();">Sport</button>
 </p>
 
 <noscript>This website (despite it's look) requires some very simple JavaScript which is embedded in this HTML.</noscript>
 
 <hr>
-<form action="http://py.scooterhacking.org:5000/cfw" onsubmit="return confirm('Do you really want to generate your CFW? You\'re running the risk of bricking your scooter, this is HIGHLY experimental!');">
+<form action="http://py.scooterhacking.org:5000/cfw" onsubmit="return confirm('Do you really want to generate your CFW? This is an experimental tool!');">
 <ul>
     <li><p>
         Base version of your firmware:
@@ -57,7 +59,8 @@
         <br>
         Speed in km/h at which the scooter will start braking on it's own when the motor is not active.<br />
 		You will still have recuperative braking when using the brake lever.<br />
-		If you want "KERS OFF" then just put this to 40km/h.
+		If you want "KERS OFF" then just put this to 40km/h.<br />
+		<b>Disabling KERS might result in failure of the control board and in injuries caused by strong braking.</b>
     </p></li>
 	
     <li><p>
@@ -230,14 +233,36 @@
         ChangeForm(forms.VERSION, "DRV133");
         ChangeForm(forms.KERS_MIN_SPEED, "6", false);
         ChangeForm(forms.MAX_SPEED, "32", false);
-        ChangeForm(forms.KERS_DIVIDOR, "6", false);
+        ChangeForm(forms.KERS_DIVIDOR, "2", false);
         ChangeForm(forms.MOTOR_POWER_CONSTANT, "51575", false);
 		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
         ChangeForm(forms.VERSION_SPOOFING, false);
 		ChangeForm(forms.THROTTLE_ALG, false);
 		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
     }
+    function Preset_SH() {
+        ChangeForm(forms.VERSION, "DRV133");
+        ChangeForm(forms.KERS_MIN_SPEED, "6", false);
+        ChangeForm(forms.MAX_SPEED, "33", true);
+        ChangeForm(forms.KERS_DIVIDOR, "2", false);
+        ChangeForm(forms.MOTOR_POWER_CONSTANT, "44000", true);
+		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
+        ChangeForm(forms.VERSION_SPOOFING, true);
+		ChangeForm(forms.THROTTLE_ALG, false);
+		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
+    }
 
+    function Preset_Sport() {
+        ChangeForm(forms.VERSION, "DRV133");
+        ChangeForm(forms.KERS_MIN_SPEED, "6", false);
+        ChangeForm(forms.MAX_SPEED, "45", true);
+        ChangeForm(forms.KERS_DIVIDOR, "2", false);
+        ChangeForm(forms.MOTOR_POWER_CONSTANT, "35000", true);
+		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
+        ChangeForm(forms.VERSION_SPOOFING, false);
+		ChangeForm(forms.THROTTLE_ALG, true);
+		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
+    }
 
     function Share() {
         var url = location.protocol + '//' + location.host;

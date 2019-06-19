@@ -9,12 +9,12 @@
 <link rel="stylesheet" type="text/css" href="static/style.css">
 <title>Générateur de custom firmware pour Ninebot ES/SNSC</title>
 </head>
-
 <body>
 
 <div class="header">
-	<p><a href="https://www.scooterhacking.org">Retourner vers ScooterHacking.org</a> - <a href="https://sctrhck.ml/discord">Rejoindre le serveur Discord</a> - <a href="https://ninebot.scooterhacking.org">English version</a>
+	<p><a href="https://www.scooterhacking.org">Retourner vers ScooterHacking.org</a> - <a href="https://sctrhck.ml/discord">Rejoindre le serveur Discord</a> 
     <h1>Générateur de custom firmware pour Ninebot ES/SNSC</h1>
+	<a href="https://ninebot.scooterhacking.org/"><img src="static/us-icon.png" /></a> - <b>[<a href="https://ninebot.scooterhacking.org/fr"><img src="static/fr-icon.png" /></a>]</b> - <a href="https://ninebot.scooterhacking.org/ru"><img src="static/ru-icon.png" /></a>
 </div>
 
 <div class="content">
@@ -29,6 +29,8 @@
 <p>
     Pré-réglages:
     <button onclick="Preset_Default();">Défaut</button>
+	<button onclick="Preset_SH();">SH</button>
+	<button onclick="Preset_Sport();">Sport</button>
 </p>
 
 <noscript>This website (despite it's look) requires some very simple JavaScript which is embedded in this HTML.</noscript>
@@ -55,7 +57,8 @@
         <br>
         Vitesse en km/h à laquelle la trottinette se mettra à freiner si le moteur n'est pas actif.<br />
 		Vous aurez toujours la récupération d'énergie lors du freinage.<br />
-		Pour désactiver le KERS, mettez cette valeur à 40.
+		Pour désactiver le KERS, mettez cette valeur à 40.<br />
+		<b>Désactiver le KERS peut amener à la destruction de votre control board et à des blessures provoquées par un freinage puissant.</b>
     </p></li>
 	
     <li><p>
@@ -228,14 +231,36 @@
         ChangeForm(forms.VERSION, "DRV133");
         ChangeForm(forms.KERS_MIN_SPEED, "6", false);
         ChangeForm(forms.MAX_SPEED, "32", false);
-        ChangeForm(forms.KERS_DIVIDOR, "6", false);
+        ChangeForm(forms.KERS_DIVIDOR, "2", false);
         ChangeForm(forms.MOTOR_POWER_CONSTANT, "51575", false);
 		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
         ChangeForm(forms.VERSION_SPOOFING, false);
 		ChangeForm(forms.THROTTLE_ALG, false);
 		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
     }
+    function Preset_SH() {
+        ChangeForm(forms.VERSION, "DRV133");
+        ChangeForm(forms.KERS_MIN_SPEED, "6", false);
+        ChangeForm(forms.MAX_SPEED, "33", true);
+        ChangeForm(forms.KERS_DIVIDOR, "2", false);
+        ChangeForm(forms.MOTOR_POWER_CONSTANT, "44000", true);
+		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
+        ChangeForm(forms.VERSION_SPOOFING, true);
+		ChangeForm(forms.THROTTLE_ALG, false);
+		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
+    }
 
+    function Preset_Sport() {
+        ChangeForm(forms.VERSION, "DRV133");
+        ChangeForm(forms.KERS_MIN_SPEED, "6", false);
+        ChangeForm(forms.MAX_SPEED, "45", true);
+        ChangeForm(forms.KERS_DIVIDOR, "2", false);
+        ChangeForm(forms.MOTOR_POWER_CONSTANT, "35000", true);
+		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
+        ChangeForm(forms.VERSION_SPOOFING, false);
+		ChangeForm(forms.THROTTLE_ALG, true);
+		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
+    }
 
     function Share() {
         var url = location.protocol + '//' + location.host;
