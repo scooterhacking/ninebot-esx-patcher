@@ -110,8 +110,10 @@ def patch_firmware():
         version, md5.hexdigest(), md5e.hexdigest())
 
     zip_file.writestr('info.txt', info_txt.encode())
-    message = "Downloaded from https://ninebot.scooterhacking.org - Share this CFW with the following link : "
-    zip_file.comment = bytes(message, 'utf-8') + flask.request.url.encode()
+    message = "Downloaded from scooterhacking.org - Share this CFW with the following link : https://ninebot.scooterhacking.org"
+    request_url = flask.request.full_path.encode()
+    request_url = request_url.decode("utf-8").replace("cfw", "", 1).encode("utf-8")
+    zip_file.comment = bytes(message, 'utf-8') + request_url
     zip_file.close()
     zip_buffer.seek(0)
     content = zip_buffer.getvalue()
