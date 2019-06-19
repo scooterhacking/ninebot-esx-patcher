@@ -5,17 +5,17 @@
 <meta name="author" content="BotoX">
 <meta name="description" content="Ninebot ES/SNSC Custom Firmware Toolkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="static/favicon.png">
-<link rel="stylesheet" type="text/css" href="static/style.css">
-<title>Ninebot ES/SNSC Custom Firmware Toolkit</title>
+<link rel="icon" type="image/png" href="/static/favicon.png">
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+<title>Ninebot ES/SNSC Конструктор прошивок контроллера</title>
 </head>
 
 <body>
 
 <div class="header">
 	<p><a href="https://www.scooterhacking.org">Return to ScooterHacking.org</a> - <a href="https://sctrhck.ml/discord">Join our Discord server</a>
-    <h1>Ninebot ES/SNSC Custom Firmware Toolkit</h1>
-	<a href="https://ninebot.scooterhacking.org/"><img src="static/us-icon.png" /></a> - <a href="https://ninebot.scooterhacking.org/fr"><img src="static/fr-icon.png" /></a> - <b>[<a href="https://ninebot.scooterhacking.org/ru"><img src="static/ru-icon.png" /></a>]</b>
+    <h1>Ninebot ES/SNSC Конструктор прошивок контроллера</h1>
+	<a href="/"><img src="/static/us-icon.png" /></a> - <a href="/fr"><img src="/static/fr-icon.png" /></a> - <b>[<a href="/ru"><img src="/static/ru-icon.png" /></a>]</b>
 </div>
 
 <div class="content">
@@ -39,7 +39,7 @@
 <noscript>This website (despite it's look) requires some very simple JavaScript which is embedded in this HTML.</noscript>
 
 <hr>
-<form action="http://py.scooterhacking.org:5000/cfw" onsubmit="return confirm('Вы действительно хотите создать свой CFW? Вы рискуете сломать свой самокат, это очень экспериментально!');">
+<form action="/cfw" onsubmit="return confirm('Вы действительно хотите создать свой CFW? Вы рискуете сломать свой самокат, это очень экспериментально!');">
 <ul>
     <li><p>
         Базовая версия прошивки:
@@ -149,165 +149,5 @@
 </p>
 </div>
 
-<script>
-    var forms = {
-        "VERSION": "version",
-        "KERS_MIN_SPEED": "kers_min_speed",
-        "KERS_DIVIDOR": "kers_dividor",
-        "MAX_SPEED": "max_speed",
-        "VERSION_SPOOFING": "version_spoofing",
-        "MOTOR_POWER_CONSTANT": "motor_power_constant",
-		"CRUISE_CONTROL_DELAY": "cruise_control_delay",
-		"THROTTLE_ALG": "throttle_alg",
-		"MOTOR_START_SPEED": "motor_start_speed"
-    };
-
-    var formValues = Object.values(forms);
-    var queryStrings = window.location.search.substring(1);
-    var queries = queryStrings.split('&');
-
-    for (var i = 0; i < queries.length; i++) {
-        var query = queries[i];
-        var tmp = query.split('=');
-        var found = false;
-
-        for (var j = 0; j < formValues.length; j++) {
-            if (formValues[j] === tmp[0]) {
-                found = true;
-                break;
-            }
-        }
-
-        if(found) {
-            if (tmp[1] === 'on') {
-                tmp[1] = true;
-            }
-
-            ChangeForm(tmp[0], tmp[1], true);
-        }
-    }
-
-    function GetForm(name) {
-        return document.getElementsByName(name)[0];
-    }
-
-    function GetFormValue(name) {
-        var o = GetForm(name);
-
-        if (o.type === "checkbox") {
-            return o.checked;
-        }
-
-        return o.value;
-    }
-
-    function GetPatchCheckBox(name) {
-        var form = GetForm(name);
-        return form.nextElementSibling && form.nextElementSibling.children[0];
-    }
-
-    function CheckForm(name, cb) {
-        GetForm(name).disabled = !cb.checked;
-    }
-
-    function ChangeForm(name, value, patch) {
-        var o = GetForm(name);
-
-        if (o.type === "checkbox") {
-            o.checked = value;
-        } else {
-            o.value = value;
-        }
-
-        if (typeof patch === 'boolean') {
-            var cb = GetPatchCheckBox(name);
-
-            if (cb) {
-                cb.checked = patch;
-                cb.onchange();
-            }
-        }
-    }
-
-    function Preset_Default() {
-        ChangeForm(forms.VERSION, "DRV133");
-        ChangeForm(forms.KERS_MIN_SPEED, "6", false);
-        ChangeForm(forms.MAX_SPEED, "32", false);
-        ChangeForm(forms.KERS_DIVIDOR, "2", false);
-        ChangeForm(forms.MOTOR_POWER_CONSTANT, "51575", false);
-		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
-        ChangeForm(forms.VERSION_SPOOFING, false);
-		ChangeForm(forms.THROTTLE_ALG, false);
-		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
-    }
-    function Preset_SH() {
-        ChangeForm(forms.VERSION, "DRV133");
-        ChangeForm(forms.KERS_MIN_SPEED, "6", false);
-        ChangeForm(forms.MAX_SPEED, "33", true);
-        ChangeForm(forms.KERS_DIVIDOR, "2", false);
-        ChangeForm(forms.MOTOR_POWER_CONSTANT, "44000", true);
-		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
-        ChangeForm(forms.VERSION_SPOOFING, true);
-		ChangeForm(forms.THROTTLE_ALG, false);
-		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
-    }
-
-    function Preset_Sport() {
-        ChangeForm(forms.VERSION, "DRV133");
-        ChangeForm(forms.KERS_MIN_SPEED, "6", false);
-        ChangeForm(forms.MAX_SPEED, "45", true);
-        ChangeForm(forms.KERS_DIVIDOR, "2", false);
-        ChangeForm(forms.MOTOR_POWER_CONSTANT, "35000", true);
-		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
-        ChangeForm(forms.VERSION_SPOOFING, false);
-		ChangeForm(forms.THROTTLE_ALG, true);
-		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
-    }
-
-    function Share() {
-        var url = location.protocol + '//' + location.host;
-        var firstParam = true;
-
-        function getSeparator() {
-            if (firstParam) {
-                firstParam = false;
-                return '?';
-            }
-
-            return '&';
-        }
-
-        for (var i = 0; i < formValues.length; i++) {
-            var form = formValues[i];
-
-            var formValue = GetFormValue(form);
-            var patchCheckbox = GetPatchCheckBox(form);
-
-            if (patchCheckbox) {
-                if (patchCheckbox.checked) {
-                    url += getSeparator() + form + '=' + formValue;
-                }
-            } else if (typeof formValue === 'boolean') {
-                if (formValue) {
-                    url += getSeparator() + form + '=on';
-                }
-            } else {
-                url += getSeparator() + form + '=' + formValue;
-            }
-        }
-
-        var textArea = document.createElement("textarea");
-
-        textArea.value = url;
-        document.body.appendChild(textArea);
-
-        textArea.focus();
-        textArea.select();
-
-        document.execCommand('copy');
-        document.getElementById('shareConfirmation').innerText = 'Copied!';
-
-        document.body.removeChild(textArea);
-    }
-</script>
+<script src="/static/form.js" type="text/javascript"></script>
 </body>
