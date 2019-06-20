@@ -66,6 +66,16 @@ def patch_firmware():
         assert max_speed >= 0 and max_speed <= 100
         patcher.max_speed(max_speed)
 
+    wheel_speed_const = flask.request.args.get('wheel_speed_const', None)
+    if wheel_speed_const:
+        wheel_speed_const = int(wheel_speed_const)
+        assert wheel_speed_const >= 200 and wheel_speed_const <= 500
+        patcher.wheel_speed_const(wheel_speed_const)
+
+    stay_on_locked = flask.request.args.get('stay_on_locked', None)
+    if stay_on_locked:
+        patcher.stay_on_locked()
+
     motor_power_constant = flask.request.args.get('motor_power_constant', None)
     if motor_power_constant is not None:
         motor_power_constant = int(motor_power_constant)
@@ -91,7 +101,6 @@ def patch_firmware():
     version_spoofing = flask.request.args.get('version_spoofing', None)
     if version_spoofing:
          patcher.version_spoofing(version)
-
 
     # make zip file for firmware
     zip_buffer = io.BytesIO()

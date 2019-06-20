@@ -215,7 +215,22 @@ class FirmwarePatcher():
         pre, post = PatchImm(self.data, ofs, 4, val, MOVW_T3_IMM)
         ret.append((ofs, pre, post))
         return ret
-
+        #@author : Lothean
+    def wheel_speed_const(self, val):
+        val = struct.pack('<H', int(val))
+        sig = [0xB4 ,0xF9, 0x1E, 0x00, 0x4F, 0xF4, 0xC3, 0x71]
+        ofs = FindPattern(self.data, sig) + 4
+        pre, post = PatchImm(self.data, ofs, 4, val, MOVW_T3_IMM)
+        self.data[ofs:ofs+4] = post
+        return [(ofs, pre, post)]
+        #@author : Lothean
+    def stay_on_locked(self):
+        sig = [None, 0x49, 0x40, 0x1C, *[None]*2, 0x88, 0x42, None, 0xDB, *[None]*4]
+        ofs = FindPattern(self.data, sig) + 14
+        pre = self.data[ofs:ofs+4]
+        post = bytes(self.ks.asm('NOP;NOP')[0])
+        self.data[ofs:ofs+4] = post
+        return [(ofs, pre, post)]
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
@@ -240,7 +255,8 @@ if __name__ == "__main__":
     #cfw.alt_throttle_alg()
     #cfw.cruise_control_delay(5)
     #cfw.motor_power_constant(48000)
-    
+    #cfw.wheel_speed_const(420)
+    cfw.stay_on_locked()
 
     cfw.encrypt()
 

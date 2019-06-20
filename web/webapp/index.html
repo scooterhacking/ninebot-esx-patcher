@@ -119,6 +119,18 @@
         <b>Modifying this value without knowing what you're doing will surely break your scooter.</b>
     </p></li>
 
+    <li><p>
+    <label>Stay on when scooter is locked:
+    <input type="checkbox" name="stay_on_locked"></label><br />
+    Disables auto shutdown when the scooter is locked so it stays on forever.<b> <font color="orange">New!</font></b>
+    </p></li>  
+	
+	<li><p>
+    Wheel speed multiplier:
+    <input name="wheel_speed_const" type="number" step="1" min="200" max="500" value="390" disabled></label>
+    <label><input type="checkbox" onchange="CheckForm('wheel_speed_const', this);">Patch?</label><br />
+	For 10" wheels use 315, don't change otherwise. <b><font color="red">Experimental!</font></b>
+    </p></li>
 
 </ul>
 <hr>

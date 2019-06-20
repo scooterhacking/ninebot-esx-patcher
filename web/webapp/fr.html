@@ -108,7 +108,7 @@
         <br>
         Utilisez l'algorithme d'accélération alternatif, change la manière dont la gâchette réagit.
     </p></li>
-	
+
     <li><p>
         Constante de puissance moteur:
         <input name="motor_power_constant" type="number" step="1" min="20000" max="65535" value="51575" disabled>
@@ -118,6 +118,18 @@
         <b>Modifier cette valeur sans savoir ce que vous faites entraînera la destruction de votre trottinette.</b>
     </p></li>
 
+    <li><p>
+    <label>Maintenir la trottinette allumée lorsqu'elle est verouillée:
+    <input type="checkbox" name="stay_on_locked"></label><br />
+    La trottinette ne s'éteindra jamais si elle est verrouillée.<b> <font color="orange">Nouveau!</font></b>
+    </p></li>   
+    
+    <li><p>
+    Coefficient de vitesse de la roue:
+    <input name="wheel_speed_const" type="number" step="1" min="200" max="500" value="390" disabled></label>
+    <label><input type="checkbox" onchange="CheckForm('wheel_speed_const', this);">Modifier?</label><br />
+    Pour des roues 10 pouces, utilisez 315. Sinon, ne pas changer. <b><font color="red">Expérimental!</font></b>
+    </p></li>
 
 </ul>
 <hr>

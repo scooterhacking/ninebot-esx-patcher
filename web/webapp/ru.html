@@ -119,6 +119,18 @@
         <b>Если вы не знаете за что отвечает это значение, вы наверняка сломаете самокат.</b>
     </p></li>
 
+    <li><p>
+    <label>Оставайтесь на связи, когда скутер заблокирован:
+    <input type="checkbox" name="stay_on_locked"></label><br />
+    Отключите автоматическое отключение, когда самокат заблокирован, чтобы он всегда оставался включенным<b> <font color="orange">Новое!</font></b>
+    </p></li> 
+
+	<li><p>
+    Константа диаметра колеса:
+    <input name="wheel_speed_const" type="number" step="1" min="200" max="500" value="390" disabled></label>
+    <label><input type="checkbox" onchange="CheckForm('wheel_speed_const', this);">Пропатчить?</label><br />
+    Для 10 "колес используйте 315, либо не меняйте. <b><font color="red">экспериментальный!</font></b>
+    </li></p>
 
 </ul>
 <hr>
