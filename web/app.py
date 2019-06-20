@@ -39,7 +39,7 @@ def home():
 @app.route('/cfw')
 def patch_firmware():
     version = flask.request.args.get('version', None)
-    if version not in ['DRV120', 'DRV133', 'DRV139', 'DRV147']:
+    if version not in ['DRV120', 'DRV133', 'DRV139', 'DRV147', 'DRV150']:
         return 'Invalid firmware version.', 400
 
     with open('/root/9botcfw/bins/{}.bin'.format(version), 'rb') as fp:

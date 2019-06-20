@@ -75,7 +75,7 @@ class FirmwarePatcher():
         self.data = XiaoTea.XiaoTea().encrypt(self.data)
     #@author : ScooterHacking
     def version_spoofing(self, DRV_version):
-        if DRV_version == "DRV133" or DRV_version == "DRV139" or DRV_version == "DRV147":
+        if DRV_version != "DRV120":
             val = b'\x50'
             sig = [0x74, 0x01, 0x40, 0xF2, None, 0x10]
             ofs = FindPattern(self.data, sig) + 5
