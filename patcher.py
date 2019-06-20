@@ -147,12 +147,12 @@ class FirmwarePatcher():
     def max_speed(self, kmh):
         ret = []
         val = struct.pack('<B', int(kmh))
-        sig = [0x95, 0xF8, 0x34, 0xC0, 0x1C, None, 0x43, 0xF2]
+        sig = [None, 0xF8, 0x34, 0xC0, None, None, 0x43, 0xF2]
         ofs = FindPattern(self.data, sig) + 4
         pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
         ret.append((ofs, pre, post))
 
-        sig = [None, 0x83, 0x01, 0xE0, 0x17, 0x20, 0xE0, 0x83, 0x46, 0xF6, 0x60]
+        sig = [None, 0x83, 0x01, 0xE0, 0x17, None, None, 0x83, 0x46, 0xF6, 0x60]
         ofs = FindPattern(self.data, sig) + 4
         pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
 
@@ -163,7 +163,7 @@ class FirmwarePatcher():
             ofs = FindPattern(self.data, sig) + 4
             pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
         else:
-            sig = [0x52, 0xC0, 0x4F, 0xF0, 0x22, 0x0E, 0x4C, 0xF2, 0x50, 0x38, 0xBC]
+            sig = [0x52, 0xC0, 0x4F, 0xF0, 0x22, 0x0E, 0x4C, 0xF2, 0x50, None, None]
             ofs = FindPattern(self.data, sig) + 4
             pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
 
