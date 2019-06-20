@@ -80,7 +80,7 @@
     }
 
     function Preset_Default() {
-        ChangeForm(forms.VERSION, "DRV133");
+        ChangeForm(forms.VERSION, "DRV139");
         ChangeForm(forms.KERS_MIN_SPEED, "6", false);
         ChangeForm(forms.MAX_SPEED, "32", false);
         ChangeForm(forms.KERS_DIVIDOR, "2", false);
@@ -93,7 +93,7 @@
 		ChangeForm(forms.STAY_ON_LOCKED, false);
     }
     function Preset_SH() {
-        ChangeForm(forms.VERSION, "DRV133");
+        ChangeForm(forms.VERSION, "DRV139");
         ChangeForm(forms.KERS_MIN_SPEED, "6", false);
         ChangeForm(forms.MAX_SPEED, "33", true);
         ChangeForm(forms.KERS_DIVIDOR, "2", false);
