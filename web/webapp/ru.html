@@ -13,7 +13,7 @@
 <body>
 
 <div class="header">
-	<a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Return to ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Join our Discord server"></a> 
+		<a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Return to ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Join our Discord server"></a> 
     <h1>Ninebot ES/SNSC Конструктор прошивок контроллера</h1>
 	<a href="/"><img src="/static/us-icon.png" /></a> - <a href="/fr"><img src="/static/fr-icon.png" /></a> - <b>[<a href="/ru"><img src="/static/ru-icon.png" /></a>]</b>
 </div>
@@ -51,7 +51,8 @@
 			<option value="DRV150">1.5.0(!)</option>
         </select>
         <br>
-        рекомендуется использовать прошивку версии 1.3+ потому что вам, скорее всего, не придется понижать BMS.
+        рекомендуется использовать прошивку версии 1.3+ потому что вам, скорее всего, не придется понижать BMS.<br />
+		<i>Версии прошивки, помеченные <b>(!)</b> mогут не поддерживать исправления.</i>
     </p></li>
 
     <li><p>
@@ -100,7 +101,7 @@
         Имитация версии прошивки:
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
-        Делает номер версии выше, чтобы предотвратить обновления из приложения Ninebot. <b><font color="orange">Новое!</font></b> <br />
+        Делает номер версии выше, чтобы предотвратить обновления из приложения Ninebot. <br />
         <i>Работает только на 1.3+</i>
     </p></li>
 	
@@ -132,7 +133,13 @@
     <label><input type="checkbox" onchange="CheckForm('wheel_speed_const', this);">Пропатчить?</label><br />
     Для 10 "колес используйте 315, либо не меняйте. <b><font color="red">экспериментальный!</font></b>
     </li></p>
-
+	
+	<li><p>
+    Исправить ограничение по размеру для ES DownG:
+    <label><input type="checkbox" name="fix_esdowng"></label><br />
+    Уменьшает общий размер ZIP-файла, пропуская незашифрованный bin-файл. Позволяет ES DownG видеть DRV133+<b> <font color="orange">Новое!</font></b>
+    </p></li> 
+	
 </ul>
 <hr>
 

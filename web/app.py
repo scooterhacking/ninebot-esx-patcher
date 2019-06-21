@@ -106,9 +106,16 @@ def patch_firmware():
     zip_buffer = io.BytesIO()
     zip_file = zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False)
 
-    zip_file.writestr('FIRM.bin', patcher.data)
-    md5 = hashlib.md5()
-    md5.update(patcher.data)
+    fix_esdowng = flask.request.args.get('fix_esdowng', None)
+    if fix_esdowng:
+        fake_data = "This BIN file is empty and shall not be used."
+        zip_file.writestr('FIRM.bin', fake_data.encode("utf-8"))
+        md5 = hashlib.md5()
+        md5.update(fake_data.encode("utf-8"))
+    else:
+        zip_file.writestr('FIRM.bin', patcher.data)
+        md5 = hashlib.md5()
+        md5.update(patcher.data)
 
     patcher.encrypt()
     zip_file.writestr('FIRM.bin.enc', patcher.data)
