@@ -9,8 +9,7 @@
 		"THROTTLE_ALG": "throttle_alg",
 		"WHEEL_SPEED_CONST": "wheel_speed_const",
 		"MOTOR_START_SPEED": "motor_start_speed",
-		"STAY_ON_LOCKED": "stay_on_locked",
-		"FIX_ESDOWNG": "fix_esdowng"
+		"STAY_ON_LOCKED": "stay_on_locked"
     };
 
     var formValues = Object.values(forms);
@@ -92,7 +91,6 @@
 		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
 		ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
 		ChangeForm(forms.STAY_ON_LOCKED, false);
-		ChangeForm(forms.FIX_ESDOWNG, false);
     }
     function Preset_SH() {
         ChangeForm(forms.VERSION, "DRV139");
@@ -106,7 +104,6 @@
 		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
 		ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
 		ChangeForm(forms.STAY_ON_LOCKED, true);
-		ChangeForm(forms.FIX_ESDOWNG, true);
     }
 
     function Preset_Sport() {
@@ -120,7 +117,6 @@
 		ChangeForm(forms.THROTTLE_ALG, true);
 		ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
 		ChangeForm(forms.STAY_ON_LOCKED, false);
-		ChangeForm(forms.FIX_ESDOWNG, true);
     }
 
     function Share() {
