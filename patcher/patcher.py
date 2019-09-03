@@ -244,10 +244,10 @@ class FirmwarePatcher():
         pre, post = PatchImm(self.data, ofs, 4, val, MOVW_T3_IMM)
         self.data[ofs:ofs+4] = post
         return [(ofs, pre, post)]
-        #@author : Lothean
+        #@authors : Mochi, Lothean
     def stay_on_locked(self):
-        sig = [None, 0x49, 0x40, 0x1C, *[None]*2, 0x88, 0x42, None, 0xDB, *[None]*4]
-        ofs = FindPattern(self.data, sig) + 14
+        sig = [0x03, 0xF0, None, None, 0xF0, 0x7B]
+        ofs = FindPattern(self.data, sig)
         pre = self.data[ofs:ofs+4]
         post = bytes(self.ks.asm('NOP;NOP')[0])
         self.data[ofs:ofs+4] = post
