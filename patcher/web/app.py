@@ -31,11 +31,6 @@ def dated_url_for(endpoint, **values):
             values['q'] = int(os.stat(file_path).st_mtime)
     return flask.url_for(endpoint, **values)
 
-
-@app.route('/')
-def home():
-    return flask.render_template('home.html')
-
 @app.route('/cfw')
 def patch_firmware():
     version = flask.request.args.get('version', None)
