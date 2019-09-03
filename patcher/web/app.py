@@ -58,7 +58,7 @@ def patch_firmware():
     max_speed = flask.request.args.get('max_speed', None)
     if max_speed is not None:
         max_speed = int(max_speed)
-        assert max_speed >= 0 and max_speed <= 100
+        assert max_speed >= 0 and max_speed <= 65
         patcher.max_speed(max_speed)
 
 
