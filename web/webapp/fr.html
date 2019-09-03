@@ -15,7 +15,7 @@
 <div class="header">
     <a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Retourner vers ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Rejoindre le serveur Discord"></a> 
     <h1>Générateur de custom firmware pour Ninebot ES/SNSC</h1>
-    <a href="/"><img src="/static/us-icon.png" /></a> - <b>[<a href="/fr"><img src="/static/fr-icon.png" /></a>]</b> - <a href="/ru"><img src="/static/ru-icon.png" /></a>
+    <a href="/"><img src="/static/us-icon.png" /></a> - <b>[<a href="/fr"><img src="/static/fr-icon.png" /></a>]</b> - <a href="/ru"><img src="/static/ru-icon.png" /></a> - <a href="/cn"><img src="/static/cn-icon.png" /></a>
 </div>
 
 <div class="content">
@@ -44,13 +44,13 @@
         <select name="version">
             <option value="DRV120">1.2.0</option>
             <option value="DRV133">1.3.3</option>
-            <option value="DRV139" selected>1.3.9</option>
-            <option value="DRV147">1.4.7(!)</option>
-            <option value="DRV150">1.5.0(!)</option>
+            <option value="DRV139">1.3.9</option>
+            <option value="DRV150">1.5.0</option>
+            <option value="DRV151" selected>1.5.1</option>
         </select>
         <br>
         La 1.3+ est recommandée, puisqu'elle ne nécessitera sûrement pas un downgrade BMS.<br />
-        <i>Les version marquées d'un <b>(!)</b> peuvent ne pas être compatibles avec les patchs.</i>
+        <!--<i>Les version marquées d'un <b>(!)</b> peuvent ne pas être compatibles avec les patchs.</i>-->
     </p></li>
 
     <li><p>
@@ -61,7 +61,7 @@
         Vitesse en km/h à laquelle la trottinette se mettra à freiner si le moteur n'est pas actif.<br />
         Vous aurez toujours la récupération d'énergie lors du freinage.<br />
         Pour désactiver le KERS, mettez cette valeur à 40.<br />
-        <b>Désactiver le KERS peut amener à la destruction de votre control board et à des blessures provoquées par un freinage puissant.</b>
+        <b><font color="red">Désactiver le KERS peut amener à la destruction de votre control board et à des blessures provoquées par un freinage puissant.</font></b>
     </p></li>
     
     <li><p>
@@ -74,7 +74,7 @@
 
     <li><p>
         Vitesse maximum:
-        <input name="max_speed" type="number" step="1" min="0" max="45" value="32" disabled>
+        <input name="max_speed" type="number" step="1" min="0" max="35" value="32" disabled>
         <label><input type="checkbox" onchange="CheckForm('max_speed', this);">Modifier?</label>
         <br>
         La trottinette restera à une vitesse inférieure à cette valeur. Utilisez cet outil si vous rencontrez un soucis de vitesse limitée. 
@@ -101,7 +101,7 @@
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
         Change le numéro de version dans l'application Ninebot pour éviter l'écrasement du CFW. <br />
-        <i>Fonctionne seulement pour les versions 1.3+</i>
+        <i>Fonctionne seulement pour les versions 1.3.x</i>
     </p></li>
     
     <li><p>
@@ -113,18 +113,24 @@
     
     <li><p>
         Constante de puissance moteur:
-        <input name="motor_power_constant" type="number" step="1" min="20000" max="65535" value="51575" disabled>
+        <input name="motor_power_constant" type="number" step="1" min="40000" max="65535" value="51575" disabled>
         <label><input type="checkbox" onchange="CheckForm('motor_power_constant', this);">Modifier?</label>
         <br>
         Plus bas = plus de puissance. Augmenter la puissance réduit la durée de vie du moteur et de la batterie.<br>
-        <b>Modifier cette valeur sans savoir ce que vous faites entraînera la destruction de votre trottinette.</b>
+        <b><font color="red">Modifier cette valeur sans savoir ce que vous faites entraînera la destruction de votre trottinette.</font></b>
     </p></li>
 
     <li><p>
     <label>Maintenir la trottinette allumée lorsqu'elle est verouillée:
-    <input type="checkbox" name="stay_on_locked"></label><br />
+    <input type="checkbox" name="stay_on_locked" disabled="disabled"></label><br />
     La trottinette ne s'éteindra jamais si elle est verrouillée.<b> <font color="orange">Nouveau!</font></b>
     </p></li>   
+    
+    <li>
+    <label>Changer la vitesse de transmission ESC<->BMS à 76800 bauds:
+    <input type="checkbox" name="bms_uart_76800"></label>
+    <p>Seulement si vous utilisez <a href="#"> le BMS open-source compatible inexistant</a>!</p>
+    </li>
     
     <li><p>
     Coefficient de vitesse de la roue:

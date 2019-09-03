@@ -39,7 +39,7 @@ def home():
 @app.route('/cfw')
 def patch_firmware():
     version = flask.request.args.get('version', None)
-    if version not in ['DRV120', 'DRV133', 'DRV139', 'DRV147', 'DRV150']:
+    if version not in ['DRV120', 'DRV133', 'DRV139', 'DRV150', 'DRV151']:
         return 'Invalid firmware version.', 400
 
     with open('/root/9botcfw/bins/{}.bin'.format(version), 'rb') as fp:
@@ -58,13 +58,14 @@ def patch_firmware():
         if kers_dividor == 2:
            patcher.kers_dividor_2()		
         if kers_dividor == 6:
-           patcher.kers_dividor_6()
+           patcher.kers_dividor_6(version)
 
     max_speed = flask.request.args.get('max_speed', None)
     if max_speed is not None:
         max_speed = int(max_speed)
         assert max_speed >= 0 and max_speed <= 100
         patcher.max_speed(max_speed)
+
 
     wheel_speed_const = flask.request.args.get('wheel_speed_const', None)
     if wheel_speed_const:
@@ -75,6 +76,10 @@ def patch_firmware():
     stay_on_locked = flask.request.args.get('stay_on_locked', None)
     if stay_on_locked:
         patcher.stay_on_locked()
+		
+    bms_uart_76800 = flask.request.args.get('bms_uart_76800', None)
+    if bms_uart_76800:
+        patcher.bms_uart_76800()
 
     motor_power_constant = flask.request.args.get('motor_power_constant', None)
     if motor_power_constant is not None:
@@ -101,6 +106,7 @@ def patch_firmware():
     version_spoofing = flask.request.args.get('version_spoofing', None)
     if version_spoofing:
          patcher.version_spoofing(version)
+
 
     # make zip file for firmware
     zip_buffer = io.BytesIO()

@@ -15,7 +15,7 @@
 <div class="header">
 		<a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Return to ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Join our Discord server"></a> 
     <h1>Ninebot ES/SNSC Конструктор прошивок контроллера</h1>
-	<a href="/"><img src="/static/us-icon.png" /></a> - <a href="/fr"><img src="/static/fr-icon.png" /></a> - <b>[<a href="/ru"><img src="/static/ru-icon.png" /></a>]</b>
+	<a href="/"><img src="/static/us-icon.png" /></a> - <a href="/fr"><img src="/static/fr-icon.png" /></a> - <b>[<a href="/ru"><img src="/static/ru-icon.png" /></a>]</b> - <a href="/cn"><img src="/static/cn-icon.png" /></a>
 </div>
 
 <div class="content">
@@ -46,13 +46,13 @@
         <select name="version">
             <option value="DRV120">1.2.0</option>
             <option value="DRV133">1.3.3</option>
-			<option value="DRV139" selected>1.3.9</option>
-			<option value="DRV147">1.4.7(!)</option>
-			<option value="DRV150">1.5.0(!)</option>
+			<option value="DRV139">1.3.9</option>
+			<option value="DRV150">1.5.0</option>
+			<option value="DRV151" selected>1.5.1</option>
         </select>
         <br>
         рекомендуется использовать прошивку версии 1.3+ потому что вам, скорее всего, не придется понижать BMS.<br />
-		<i>Версии прошивки, помеченные <b>(!)</b> mогут не поддерживать исправления.</i>
+		<!--<i>Версии прошивки, помеченные <b>(!)</b> mогут не поддерживать исправления.</i>-->
     </p></li>
 
     <li><p>
@@ -62,7 +62,8 @@
         <br>
         Скорость в км/ч, при которой самокат начнет торможение самостоятельно, когда двигатель не активен.<br />
 		Вы все еще будете иметь рекуперативное торможение при использовании тормоза.<br />
-		Если вы хотите отключить Рекуперативное торможение, просто поставьте 40 км/ч.
+		Если вы хотите отключить Рекуперативное торможение, просто поставьте 40 км/ч.<br />
+		<b><font color="red">Отключение KERS может привести к неисправности платы управления и травмам персонала, вызванным сильным торможением.</b></font>
     </p></li>
 	
     <li><p>
@@ -75,7 +76,7 @@
 
     <li><p>
         Максимальная Скорость:
-        <input name="max_speed" type="number" step="1" min="0" max="45" value="32" disabled>
+        <input name="max_speed" type="number" step="1" min="0" max="35" value="32" disabled>
         <label><input type="checkbox" onchange="CheckForm('max_speed', this);">Пропатчить?</label>
         <br>
         Самокат будет ехать ниже этой скорости. Используйте его, если вы хотите ограничить скорость даже в спортивном режиме. 
@@ -102,11 +103,11 @@
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
         Делает номер версии выше, чтобы предотвратить обновления из приложения Ninebot. <br />
-        <i>Работает только на 1.3+</i>
+        <i>Работает только на 1.3.x</i>
     </p></li>
 	
     <li><p>
-        Альтернативный алгоритм ускорения:
+        Альтернативный алгоритм ускорения.
         <label><input type="checkbox" name="throttle_alg"></label>
         <br>
         Использует альтернативный алгоритм ускорения.
@@ -114,18 +115,24 @@
 	
     <li><p>
         Константа мощности мотора:
-        <input name="motor_power_constant" type="number" step="1" min="20000" max="65535" value="51575" disabled>
+        <input name="motor_power_constant" type="number" step="1" min="40000" max="65535" value="51575" disabled>
         <label><input type="checkbox" onchange="CheckForm('motor_power_constant', this);">Пропатчить?</label>
         <br>
         Ниже = больше мощности. Слишком большая мощность сокращает жизнь батареи и мотора.<br>
-        <b>Если вы не знаете за что отвечает это значение, вы наверняка сломаете самокат.</b>
+        <b><font color="red">Если вы не знаете за что отвечает это значение, вы наверняка сломаете самокат.</font></b>
     </p></li>
 
     <li><p>
     <label>Оставайтесь на связи, когда скутер заблокирован:
-    <input type="checkbox" name="stay_on_locked"></label><br />
+    <input type="checkbox" name="stay_on_locked" disabled="disabled"></label><br />
     Отключите автоматическое отключение, когда самокат заблокирован, чтобы он всегда оставался включенным<b> <font color="orange">Новое!</font></b>
     </p></li> 
+	
+	<li>
+    <label>Изменить скорость обмена данными с BMS на значение 76800:
+    <input type="checkbox" name="bms_uart_76800"></label>
+    <p>Только если вы используете <a href="#">  совместимую BMS с открытым исходным кодом</a>!</p>
+    </li>
 
 	<li><p>
     Константа диаметра колеса:

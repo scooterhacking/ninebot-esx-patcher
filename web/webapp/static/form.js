@@ -9,7 +9,8 @@
 		"THROTTLE_ALG": "throttle_alg",
 		"WHEEL_SPEED_CONST": "wheel_speed_const",
 		"MOTOR_START_SPEED": "motor_start_speed",
-		"STAY_ON_LOCKED": "stay_on_locked"
+		"STAY_ON_LOCKED": "stay_on_locked",
+		"BMS_UART_76800":"bms_uart_76800"
     };
 
     var formValues = Object.values(forms);
@@ -80,7 +81,7 @@
     }
 
     function Preset_Default() {
-        ChangeForm(forms.VERSION, "DRV139");
+        ChangeForm(forms.VERSION, "DRV151");
         ChangeForm(forms.KERS_MIN_SPEED, "6", false);
         ChangeForm(forms.MAX_SPEED, "32", false);
         ChangeForm(forms.KERS_DIVIDOR, "2", false);
@@ -91,6 +92,7 @@
 		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
 		ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
 		ChangeForm(forms.STAY_ON_LOCKED, false);
+		ChangeForm(forms.BMS_UART_76800, false);
     }
     function Preset_SH() {
         ChangeForm(forms.VERSION, "DRV139");
@@ -104,6 +106,7 @@
 		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
 		ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
 		ChangeForm(forms.STAY_ON_LOCKED, true);
+		ChangeForm(forms.BMS_UART_76800, false);
     }
 
     function Preset_Sport() {
@@ -117,6 +120,7 @@
 		ChangeForm(forms.THROTTLE_ALG, true);
 		ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
 		ChangeForm(forms.STAY_ON_LOCKED, false);
+		ChangeForm(forms.BMS_UART_76800, false);
     }
 
     function Share() {

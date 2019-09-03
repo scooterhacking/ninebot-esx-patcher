@@ -15,7 +15,7 @@
 <div class="header">
 	<a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Return to ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Join our Discord server"></a> 
     <h1>Ninebot ES/SNSC Custom Firmware Toolkit</h1>
-	<b>[<a href="/"><img src="/static/us-icon.png" /></a>]</b> - <a href="/fr"><img src="/static/fr-icon.png" /></a> - <a href="/ru"><img src="/static/ru-icon.png" /></a>
+	<b>[<a href="/"><img src="/static/us-icon.png" /></a>]</b> - <a href="/fr"><img src="/static/fr-icon.png" /></a> - <a href="/ru"><img src="/static/ru-icon.png" /></a> - <a href="/cn"><img src="/static/cn-icon.png" /></a>
 	</div>
 <div class="content">
 <p>
@@ -45,24 +45,24 @@
         <select name="version">
             <option value="DRV120">1.2.0</option>
             <option value="DRV133">1.3.3</option>
-			<option value="DRV139" selected>1.3.9</option>
-			<option value="DRV147">1.4.7(!)</option>
-			<option value="DRV150">1.5.0(!)</option>
+			<option value="DRV139">1.3.9</option>
+			<option value="DRV150">1.5.0</option>
+			<option value="DRV151" selected>1.5.1</option>
         </select>
         <br>
         1.3+ is recommended over 1.2.0, because you most likely won't have to downgrade the BMS.<br />
-		<i>Firmware versions marked with <b>(!)</b> might not support patching.</i>
+		<!--<i>Firmware versions marked with <b>(!)</b> might not support patching.</i>-->
     </p></li>
 
     <li><p>
         KERS minimum speed:
-        <input name="kers_min_speed" type="number" step="1" min="0" max="100" value="6" disabled>
+        <input name="kers_min_speed" type="number" step="1" min="0" max="100" value="6" disabled >
         <label><input type="checkbox" onchange="CheckForm('kers_min_speed', this);">Patch?</label>
         <br>
         Speed in km/h at which the scooter will start braking on it's own when the motor is not active.<br />
 		You will still have recuperative braking when using the brake lever.<br />
 		If you want "KERS OFF" then just put this to 40km/h.<br />
-		<b>Disabling KERS might result in failure of the control board and in injuries caused by strong braking.</b>
+		<b><font color="red">Disabling KERS might result in failure of the control board and in injuries caused by strong braking.</font></b>
     </p></li>
 	
     <li><p>
@@ -75,7 +75,7 @@
 
     <li><p>
         Maximum speed:
-        <input name="max_speed" type="number" step="1" min="0" max="45" value="32" disabled>
+        <input name="max_speed" type="number" step="1" min="0" max="35" value="32" disabled>
         <label><input type="checkbox" onchange="CheckForm('max_speed', this);">Patch?</label>
         <br>
         The scooter will stay below this speed. Use it if you're running at limited speed even in Sport mode. 
@@ -102,7 +102,7 @@
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
         Makes the version number higher to prevent updates from the Ninebot app. <br />
-        <i>Only works on 1.3+</i>
+        <i>Only works on 1.3.x</i>
     </p></li>
 	
     <li><p>
@@ -114,18 +114,24 @@
 	
     <li><p>
         Motor power constant:
-        <input name="motor_power_constant" type="number" step="1" min="20000" max="65535" value="51575" disabled>
+        <input name="motor_power_constant" type="number" step="1" min="40000" max="65535" value="51575" disabled>
         <label><input type="checkbox" onchange="CheckForm('motor_power_constant', this);">Patch?</label>
         <br>
         Lower = More power. Too much power is not recommended for battery and motor life.<br>
-        <b>Modifying this value without knowing what you're doing will surely break your scooter.</b>
+        <b><font color="red">Modifying this value without knowing what you're doing will surely break your scooter.</font></b>
     </p></li>
 	
     <li><p>
     <label>Stay on when scooter is locked:
-    <input type="checkbox" name="stay_on_locked"></label><br />
+    <input type="checkbox" name="stay_on_locked" disabled="disabled"></label><br />
     Disables auto shutdown when the scooter is locked so it stays on forever.<b> <font color="orange">New!</font></b>
     </p></li>  
+	
+	<li>
+    <label>Change ESC<->BMS baud rate to 76800:
+    <input type="checkbox" name="bms_uart_76800"></label>
+    <p>Only if you use the <a href="#"> nonexistent compatible open source BMS</a>!</p>
+    </li>
 	
 	<li><p>
     Wheel speed multiplier:

@@ -47,14 +47,14 @@
         <select name="version">
             <option value="DRV120">1.2.0</option>
             <option value="DRV133">1.3.3</option>
-			<option value="DRV139" selected>1.3.9</option>
-			<option value="DRV147">1.4.7(!)</option>
-			<option value="DRV150">1.5.0(!)</option>
+			<option value="DRV139">1.3.9</option>
+			<option value="DRV150">1.5.0</option>
+			<option value="DRV151" selected>1.5.1</option>
         </select>
         <br>
 		 推荐1.3+的固件，因为你很可能不需要降级BMS
         <br />
-		<i>固件带有符号 <b>(!)</b> 的可能不支持patching。</i>
+		<!--<i>固件带有符号 <b>(!)</b> 的可能不支持patching。</i>-->
     </p></li>
 
     <li><p>
@@ -65,7 +65,7 @@
 		 滑板车将开启动能回收的速度（km / h）。（电机未激活时）<br />
 		 使用制动按钮时，车辆仍将进行动能回收。<br />
 		 如果不想使用动能回收，设置此项为40km/h<br />
-		<b>关闭动能回收可能因快速的刹车导致控制板失效和受伤。</b>
+		<b><font color="red">关闭动能回收可能因快速的刹车导致控制板失效和受伤。</font></b>
     </p></li>
 
     <li><p>
@@ -78,7 +78,7 @@
 
     <li><p>
         最大速度:
-        <input name="max_speed" type="number" step="1" min="0" max="45" value="32" disabled>
+        <input name="max_speed" type="number" step="1" min="0" max="35" value="32" disabled>
         <label><input type="checkbox" onchange="CheckForm('max_speed', this);">修改?</label>
         <br>
 		滑板车会低于这个速度运行，启用此项当你启用运动模式后仍然被限制很低的速度
@@ -105,7 +105,7 @@
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
 		设置较高的版本号以避免被官方app自动升级 <br />
-        <i>只能运行在1.3+</i>
+        <i>只能运行在1.3.x</i>
     </p></li>
 
     <li><p>
@@ -117,18 +117,24 @@
 
     <li><p>
         电机功率常数:
-        <input name="motor_power_constant" type="number" step="1" min="20000" max="65535" value="51575" disabled>
+        <input name="motor_power_constant" type="number" step="1" min="40000" max="65535" value="51575" disabled>
         <label><input type="checkbox" onchange="CheckForm('motor_power_constant', this);">修改?</label>
         <br>
         数值越低 = 功率越高。太高的功率不利于电机和电池。<br>
-        <b>不懂就别弄，不然一定会弄坏的滑板车的！</b>
+        <b><font color="red">不懂就别弄，不然一定会弄坏的滑板车的！</font></b>
     </p></li>
 
     <li><p>
     <label>解除锁定状态下的自动关机:
-    <input type="checkbox" name="stay_on_locked"></label><br />
+    <input type="checkbox" name="stay_on_locked" disabled="disabled"></label><br />
 	取消滑板车锁定时的自动关机。<b> <font color="orange">新!</font></b>
     </p></li>  
+	
+	<li>
+    <label>将ESC <-> BMS波特率更改为76800:
+    <input type="checkbox" name="bms_uart_76800"></label>
+    <p>只有你使用了 <a href="#"> 不存在兼容的开源BMS</a>!</p>
+    </li>
 
 	<li><p>
     轮速参数:

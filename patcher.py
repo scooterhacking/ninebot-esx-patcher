@@ -75,7 +75,7 @@ class FirmwarePatcher():
         self.data = XiaoTea.XiaoTea().encrypt(self.data)
     #@author : ScooterHacking
     def version_spoofing(self, DRV_version):
-        if DRV_version != "DRV120":
+        if DRV_version == "DRV133" or DRV_version == "DRV139":
             val = b'\x50'
             sig = [0x74, 0x01, 0x40, 0xF2, None, 0x10]
             ofs = FindPattern(self.data, sig) + 5
@@ -84,10 +84,23 @@ class FirmwarePatcher():
     #@author : majsi
     def kers_min_speed(self, kmh):
         val = struct.pack('<H', int(kmh * 390))
-        sig = [0x25, 0x68, 0x40, 0xF6, 0x24, 0x17, 0xBD, 0x42]
+        sig = [0x25, 0x68, 0x40, 0xF6, 0x24, *[None]*2, 0x42]
         ofs = FindPattern(self.data, sig) + 2
         pre, post = PatchImm(self.data, ofs, 4, val, MOVW_T3_IMM)
         return [(ofs, pre, post)]
+    def bms_uart_76800(self):
+        ofs = 0
+        while True:
+            sig = [0x00, 0x21, 0x4F, 0xF4, 0xE1, 0x30, 0x00, 0x90, 0xAD, 0xF8, 0x08, 0x10, 0x0C, 0x20, 0xAD, 0xF8, 0x0A, 0x00, 0x60, 0x15, 0xAD, 0xF8, 0x14, 0x00, 0xAD]
+            ofs = FindPattern(self.data, sig) + 2
+
+            # USART3 address
+            sig = [0x00, 0x48, 0x00, 0x40]
+            try:
+                FindPattern(self.data, sig)
+                break
+            except SignatureException:
+                continue
     #@author : majsi
     def normal_max_speed(self, kmh):
         val = struct.pack('<B', int(kmh))
@@ -96,8 +109,11 @@ class FirmwarePatcher():
         pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
         return [(ofs, pre, post)]
     #@author : majsi
-    def kers_dividor_6(self):
-        sig = [0x00, 0xEB, 0x40, 0x00, 0x40, 0x00, None, None, 0x00, 0xEB, 0x40, 0x00]
+    def kers_dividor_6(self, DRV_version):
+        if DRV_version != "DRV147" and DRV_version != "DRV150" and DRV_version != "DRV151":
+            sig = [0x00, 0xEB, 0x40, 0x00, 0x40, 0x00, None, None, 0x00, 0xEB, 0x40, 0x00]
+        else:
+            sig = [0x00, 0xEB, 0x80, 0x00, 0x40, 0x00, 0xA4, 0xF8, 0x7C, 0x00, 0x13, 0x48]
         ofs = FindPattern(self.data, sig)
         pre = self.data[ofs:ofs + 6]
         asm = f'''
@@ -127,7 +143,7 @@ class FirmwarePatcher():
         return ret
 	#@author : majsi
     def kers_dividor_2(self):
-        sig = [0x00, 0xEB, 0x80, 0x00, 0x80, 0x00, 0xC0, 0x0A]
+        sig = [0x00, 0xEB, 0x80, 0x00, None, 0x00, None, None]
         ofs = FindPattern(self.data, sig) + 6
         pre = self.data[ofs:ofs + 2]
         asm = f'''
@@ -152,7 +168,7 @@ class FirmwarePatcher():
         pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
         ret.append((ofs, pre, post))
 
-        sig = [None, 0x83, 0x01, 0xE0, 0x17, None, None, 0x83, 0x46, 0xF6, 0x60]
+        sig = [None, None, None, None, 0x17, None, None, 0x83, 0x46, 0xF6, 0x60]
         ofs = FindPattern(self.data, sig) + 4
         pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
 
@@ -160,6 +176,11 @@ class FirmwarePatcher():
 
         if self.data[0x7BAA] == 0x33 and self.data[0x7BAB] == 0x11:
             sig = [None, 0xF8, 0x2E, 0xE0, 0x22, 0x20, 0xE0, 0x83, 0x1B, 0xE0, 0x95]
+            ofs = FindPattern(self.data, sig) + 4
+            pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
+        elif (self.data[0x8242] == 0xA8 and self.data[0x8243] == 0x71) or \
+             (self.data[0x8246] == 0x51 and self.data[0x8247] == 0x11):
+            sig = [0xDE, 0xD0, 0x11, 0xE0, 0x22, None, None, 0x83, 0xDE, 0xE7, 0x95]
             ofs = FindPattern(self.data, sig) + 4
             pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
         else:
@@ -231,6 +252,7 @@ class FirmwarePatcher():
         post = bytes(self.ks.asm('NOP;NOP')[0])
         self.data[ofs:ofs+4] = post
         return [(ofs, pre, post)]
+
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
