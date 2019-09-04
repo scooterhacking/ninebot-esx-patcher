@@ -282,7 +282,6 @@ if __name__ == "__main__":
 
     cfw = FirmwarePatcher(data)
 
-    cfw.version_spoofing()
     cfw.kers_min_speed(6)
     cfw.max_speed(32)
     #cfw.kers_dividor_6()
@@ -293,6 +292,7 @@ if __name__ == "__main__":
     #cfw.motor_power_constant(48000)
     #cfw.wheel_speed_const(420)
     cfw.stay_on_locked()
+    #cfw.version_spoofing("DRV150")
 
     cfw.encrypt()
 
