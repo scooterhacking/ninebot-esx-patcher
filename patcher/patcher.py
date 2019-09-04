@@ -75,11 +75,25 @@ class FirmwarePatcher():
         self.data = XiaoTea.XiaoTea().encrypt(self.data)
     #@author : ScooterHacking
     def version_spoofing(self, DRV_version):
-        if DRV_version == "DRV133" or DRV_version == "DRV139":
+        if DRV_version == "DRV133" or DRV_version == "DRV139" or DRV_version == "DRV151":
             val = b'\x50'
             sig = [0x74, 0x01, 0x40, 0xF2, None, 0x10]
             ofs = FindPattern(self.data, sig) + 5
             pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
+            return [(ofs, pre, post)]
+        if DRV_version == "DRV120":
+            sig = [0x4F, 0xF4, 0x90, 0x70, 0xA0, 0x86]
+            ofs = FindPattern(self.data, sig)
+            pre = self.data[ofs:ofs+4]
+            post = bytes(self.ks.asm('MOV.W   R0, #0x520')[0])
+            self.data[ofs:ofs+4] = post
+            return [(ofs, pre, post)]
+        if DRV_version == "DRV150":
+            sig = [0x4F, 0xF4, 0xA8, 0x70, 0xA0, 0x86]
+            ofs = FindPattern(self.data, sig)
+            pre = self.data[ofs:ofs+4]
+            post = bytes(self.ks.asm('MOV.W   R0, #0x550')[0])
+            self.data[ofs:ofs+4] = post
             return [(ofs, pre, post)]
     #@author : majsi
     def kers_min_speed(self, kmh):
