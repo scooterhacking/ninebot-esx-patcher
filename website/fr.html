@@ -13,9 +13,9 @@
 <body>
 
 <div class="header">
-    <a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Retourner vers ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Rejoindre le serveur Discord"></a> 
+	<a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Retourner vers ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Rejoindre le serveur Discord"></a> 
     <h1>Générateur de custom firmware pour Ninebot ES/SNSC</h1>
-    <a href="/"><img src="/static/us-icon.png" /></a> - <b>[<a href="/fr"><img src="/static/fr-icon.png" /></a>]</b> - <a href="/ru"><img src="/static/ru-icon.png" /></a> - <a href="/cn"><img src="/static/cn-icon.png" /></a>
+	<a href="/"><img src="/static/us-icon.png" /></a> - <b>[<a href="/fr"><img src="/static/fr-icon.png" /></a>]</b> - <a href="/ru"><img src="/static/ru-icon.png" /></a> - <a href="/cn"><img src="/static/cn-icon.png" /></a>
 </div>
 
 <div class="content">
@@ -24,14 +24,15 @@
     Des mesures de sécurité sont appliquées pour éviter le brick de votre trottinette.<br>
     Soyez conscient qu'une puissance moteur élevée réduit la durée de vie de celui-ci, ainsi que de la batterie.<br>
     Par défaut, rien ne sera modifié. Activez l'option "Modifier?" à côté des options désirées.<br />
-    ScooterHacking.org ou ses membres ne peuvent être tenus responsables des dégats causés à vous ou votre trottinette.
+	ScooterHacking.org ou ses membres ne peuvent être tenus responsables des dégats causés à vous ou votre trottinette.
 </p>
 
 <p>
     Pré-réglages:
     <button onclick="Preset_Default();">Défaut</button>
-    <button onclick="Preset_SH();">SH</button>
-    <button onclick="Preset_Sport();">Sport</button>
+	<button onclick="Preset_ES4();">ES4</button>
+	<button onclick="Preset_ES4L();">ES4-L</button>
+	<button onclick="Preset_ES2Mod();">ES2Mod</button>
 </p>
 
 <noscript>This website (despite it's look) requires some very simple JavaScript which is embedded in this HTML.</noscript>
@@ -44,13 +45,13 @@
         <select name="version">
             <option value="DRV120">1.2.0</option>
             <option value="DRV133">1.3.3</option>
-            <option value="DRV139">1.3.9</option>
-            <option value="DRV150">1.5.0</option>
-            <option value="DRV151" selected>1.5.1</option>
+			<option value="DRV139">1.3.9</option>
+			<option value="DRV150">1.5.0</option>
+			<option value="DRV151" selected>1.5.1</option>
         </select>
         <br>
         La 1.3+ est recommandée, puisqu'elle ne nécessitera sûrement pas un downgrade BMS.<br />
-        <!--<i>Les version marquées d'un <b>(!)</b> peuvent ne pas être compatibles avec les patchs.</i>-->
+		<!--<i>Les version marquées d'un <b>(!)</b> peuvent ne pas être compatibles avec les patchs.</i>-->
     </p></li>
 
     <li><p>
@@ -59,11 +60,11 @@
         <label><input type="checkbox" onchange="CheckForm('kers_min_speed', this);">Modifier?</label>
         <br>
         Vitesse en km/h à laquelle la trottinette se mettra à freiner si le moteur n'est pas actif.<br />
-        Vous aurez toujours la récupération d'énergie lors du freinage.<br />
-        Pour désactiver le KERS, mettez cette valeur à 40.<br />
-        <b><font color="red">Désactiver le KERS peut amener à la destruction de votre control board et à des blessures provoquées par un freinage puissant.</font></b>
+		Vous aurez toujours la récupération d'énergie lors du freinage.<br />
+		Pour désactiver le KERS, mettez cette valeur à 40.<br />
+		<b><font color="red">Désactiver le KERS peut amener à la destruction de votre control board et à des blessures provoquées par un freinage puissant.</font></b> <a href="https://www.scooterhacking.org/forum/viewtopic.php?f=4&t=118">(...)</a>
     </p></li>
-    
+	
     <li><p>
         Facteur de division du KERS:
         <input name="kers_dividor" type="number" step="4" min="2" max="6" value="2" disabled>
@@ -87,7 +88,7 @@
         <br>
         Combien de secondes avant l'activation du régulateur. 
     </p></li>
-    
+	
     <li><p>
         Vitesse de démarrage du moteur:
         <input name="motor_start_speed" type="number" step="1" min="0" max="10" value="5" disabled>
@@ -95,22 +96,21 @@
         <br>
         Vitesse minimum en km/h avant que le moteur fonctionne. 
     </p></li>
-    
+	
     <li><p>
         Changement de version:
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
-        Change le numéro de version dans l'application Ninebot pour éviter l'écrasement du CFW. <br />
-        <i>Fonctionne seulement pour les versions 1.3.x</i>
+        Change le numéro de version dans l'application Ninebot pour éviter l'écrasement du CFW. <b> <font color="blue">Mis à jour!</font></b>
     </p></li>
-    
+	
     <li><p>
         Algorithme d'accélération alternatif:
         <label><input type="checkbox" name="throttle_alg"></label>
         <br>
         Utilisez l'algorithme d'accélération alternatif, change la manière dont la gâchette réagit.
     </p></li>
-    
+	
     <li><p>
         Constante de puissance moteur:
         <input name="motor_power_constant" type="number" step="1" min="40000" max="65535" value="51575" disabled>
@@ -122,17 +122,24 @@
 
     <li><p>
     <label>Maintenir la trottinette allumée lorsqu'elle est verouillée:
-    <input type="checkbox" name="stay_on_locked" disabled="disabled"></label><br />
-    La trottinette ne s'éteindra jamais si elle est verrouillée.<b> <font color="orange">Nouveau!</font></b>
-    </p></li>   
-    
-    <li>
+    <input type="checkbox" name="stay_on_locked"></label><br />
+    La trottinette ne s'éteindra jamais si elle est verrouillée.<b> <font color="blue">Mis à jour!</font></b>
+    </p></li> 	
+	
+    <li><p>
+    Ignorer l'état du chargeur:
+    <input type="checkbox" name="remove_charging_mode">
+    <br>
+    L'ESC ignorera l'état de l'entrée chargeur, la trottinette peut être utilisée durant la charge. Utile pour des batteries externes non-officielles.
+    </p></li>
+	
+	<li>
     <label>Changer la vitesse de transmission ESC<->BMS à 76800 bauds:
     <input type="checkbox" name="bms_uart_76800"></label>
     <p>Seulement si vous utilisez <a href="#"> le BMS open-source compatible inexistant</a>!</p>
     </li>
-    
-    <li><p>
+	
+	<li><p>
     Coefficient de vitesse de la roue:
     <input name="wheel_speed_const" type="number" step="1" min="200" max="500" value="390" disabled></label>
     <label><input type="checkbox" onchange="CheckForm('wheel_speed_const', this);">Modifier?</label><br />
@@ -154,17 +161,17 @@
 <p>
     <b><span style="color: red;">&#9888;&nbsp;NOUVEAU </span>L'outil génère maintenant un .zip avec le firmware encrypté, non encrypté et un fichier .txt.</b><br>
     <b><span style="color: red;">&#9888;&nbsp;NOUVEAU </span>Utilisez l'outil suivant pour flasher via Windows 10 (auteur: majsi): <a href="https://www.microsoft.com/en-us/p/ninebot-flasher/9p5hws0hq55s?activetab=pivot:overviewtab">Ninebot-Flasher</a></b><br>
-    <b><span style="color: red;">&#9888;&nbsp;NOUVEAU </span>Utilisez l'outil suivant pour flasher via Android (auteur: CamiAlfa) <a href="https://play.google.com/store/apps/details?id=com.esdowngrade">ES DownG</a></b><br>
-    </p>
+	<b><span style="color: red;">&#9888;&nbsp;NOUVEAU </span>Utilisez l'outil suivant pour flasher via Android (auteur: CamiAlfa) <a href="https://play.google.com/store/apps/details?id=com.esdowngrade">ES DownG</a></b><br>
+	</p>
 
 <hr>
 <p>
     Code source sur GitHub: <a href="https://github.com/scooterhacking/ninebot-es-snsc-firmware-patcher" target="_blank">https://github.com/scooterhacking/ninebot-es-snsc-firmware-patcher</a>
     <br>
     <b>Faire un don à majsi (CFW scripting): <a href="https://www.paypal.me/majsinko" target="_blank">https://www.paypal.me/majsinko</a><br />
-    Faire un don à CamiAlfa (ES DownG): <a href="https://www.paypal.me/camialfa" target="_blank">https://www.paypal.me/camialfa</a><br />
-    Faire un don à ScooterHacking.org (hébergeur, maintenance): <a href="https://paypal.me/scooterhacking" target="_blank">https://paypal.me/scooterhacking</a><br />
-    Faire un don à BotoX(créateur du générateur de CFW pour M365): <a href="https://paypal.me/BotoXbz" target="_blank">https://paypal.me/BotoXbz</a></b>
+	Faire un don à CamiAlfa (ES DownG): <a href="https://www.paypal.me/camialfa" target="_blank">https://www.paypal.me/camialfa</a><br />
+	Faire un don à ScooterHacking.org (hébergeur, maintenance): <a href="https://paypal.me/scooterhacking" target="_blank">https://paypal.me/scooterhacking</a><br />
+	Faire un don à BotoX(créateur du générateur de CFW pour M365): <a href="https://paypal.me/BotoXbz" target="_blank">https://paypal.me/BotoXbz</a></b>
 </p>
 </div>
 

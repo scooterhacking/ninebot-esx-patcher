@@ -5,12 +5,13 @@
         "MAX_SPEED": "max_speed",
         "VERSION_SPOOFING": "version_spoofing",
         "MOTOR_POWER_CONSTANT": "motor_power_constant",
-		"CRUISE_CONTROL_DELAY": "cruise_control_delay",
-		"THROTTLE_ALG": "throttle_alg",
-		"WHEEL_SPEED_CONST": "wheel_speed_const",
-		"MOTOR_START_SPEED": "motor_start_speed",
-		"STAY_ON_LOCKED": "stay_on_locked",
-		"BMS_UART_76800":"bms_uart_76800"
+        "CRUISE_CONTROL_DELAY": "cruise_control_delay",
+        "THROTTLE_ALG": "throttle_alg",
+        "WHEEL_SPEED_CONST": "wheel_speed_const",
+        "MOTOR_START_SPEED": "motor_start_speed",
+		"REMOVE_CHARGING_MODE": "remove_charging_mode",
+        "STAY_ON_LOCKED": "stay_on_locked",
+        "BMS_UART_76800":"bms_uart_76800"
     };
 
     var formValues = Object.values(forms);
@@ -86,43 +87,57 @@
         ChangeForm(forms.MAX_SPEED, "32", false);
         ChangeForm(forms.KERS_DIVIDOR, "2", false);
         ChangeForm(forms.MOTOR_POWER_CONSTANT, "51575", false);
-		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
+        ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
         ChangeForm(forms.VERSION_SPOOFING, false);
-		ChangeForm(forms.THROTTLE_ALG, false);
-		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
-		ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
-		ChangeForm(forms.STAY_ON_LOCKED, false);
-		ChangeForm(forms.BMS_UART_76800, false);
+        ChangeForm(forms.THROTTLE_ALG, false);
+		ChangeForm(forms.REMOVE_CHARGING_MODE, false);
+        ChangeForm(forms.MOTOR_START_SPEED, "5", false);
+        ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
+        ChangeForm(forms.STAY_ON_LOCKED, false);
+        ChangeForm(forms.BMS_UART_76800, false);
     }
-    function Preset_SH() {
+    function Preset_ES4() {
+        ChangeForm(forms.VERSION, "DRV151");
+        ChangeForm(forms.KERS_MIN_SPEED, "6", false);
+        ChangeForm(forms.MAX_SPEED, "32", true);
+        ChangeForm(forms.KERS_DIVIDOR, "2", false);
+        ChangeForm(forms.MOTOR_POWER_CONSTANT, "51575", false);
+        ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
+        ChangeForm(forms.VERSION_SPOOFING, true);
+        ChangeForm(forms.THROTTLE_ALG, false);
+		ChangeForm(forms.REMOVE_CHARGING_MODE, false);
+        ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
+        ChangeForm(forms.STAY_ON_LOCKED, true);
+        ChangeForm(forms.BMS_UART_76800, false);
+    }
+    function Preset_ES4L() {
+        ChangeForm(forms.VERSION, "DRV151");
+        ChangeForm(forms.KERS_MIN_SPEED, "6", false);
+        ChangeForm(forms.MAX_SPEED, "27", true);
+        ChangeForm(forms.KERS_DIVIDOR, "2", false);
+        ChangeForm(forms.MOTOR_POWER_CONSTANT, "51575", false);
+        ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
+        ChangeForm(forms.VERSION_SPOOFING, true);
+        ChangeForm(forms.THROTTLE_ALG, false);
+		ChangeForm(forms.REMOVE_CHARGING_MODE, false);
+        ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
+        ChangeForm(forms.STAY_ON_LOCKED, true);
+        ChangeForm(forms.BMS_UART_76800, false);
+    }
+    function Preset_ES2Mod() {
         ChangeForm(forms.VERSION, "DRV139");
         ChangeForm(forms.KERS_MIN_SPEED, "6", false);
-        ChangeForm(forms.MAX_SPEED, "33", true);
-        ChangeForm(forms.KERS_DIVIDOR, "2", false);
-        ChangeForm(forms.MOTOR_POWER_CONSTANT, "50000", true);
-		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
-        ChangeForm(forms.VERSION_SPOOFING, true);
-		ChangeForm(forms.THROTTLE_ALG, false);
-		ChangeForm(forms.MOTOR_START_SPEED, "5", false);
-		ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
-		ChangeForm(forms.STAY_ON_LOCKED, true);
-		ChangeForm(forms.BMS_UART_76800, false);
-    }
-
-    function Preset_Sport() {
-        ChangeForm(forms.VERSION, "DRV133");
-        ChangeForm(forms.KERS_MIN_SPEED, "6", false);
-        ChangeForm(forms.MAX_SPEED, "45", true);
+        ChangeForm(forms.MAX_SPEED, "28", true);
         ChangeForm(forms.KERS_DIVIDOR, "2", false);
         ChangeForm(forms.MOTOR_POWER_CONSTANT, "45000", true);
-		ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
-        ChangeForm(forms.VERSION_SPOOFING, false);
-		ChangeForm(forms.THROTTLE_ALG, true);
-		ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
-		ChangeForm(forms.STAY_ON_LOCKED, false);
-		ChangeForm(forms.BMS_UART_76800, false);
+        ChangeForm(forms.CRUISE_CONTROL_DELAY, "5", false);
+        ChangeForm(forms.VERSION_SPOOFING, true);
+        ChangeForm(forms.THROTTLE_ALG, false);
+		ChangeForm(forms.REMOVE_CHARGING_MODE, false);
+        ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
+        ChangeForm(forms.STAY_ON_LOCKED, true);
+        ChangeForm(forms.BMS_UART_76800, false);
     }
-
     function Share() {
         var url = location.protocol + '//' + location.host;
         var firstParam = true;

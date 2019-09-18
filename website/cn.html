@@ -33,8 +33,9 @@
 <p>
     预设:
     <button onclick="Preset_Default();">默认</button>
-	<button onclick="Preset_SH();">SH</button>
-	<button onclick="Preset_Sport();">运动模式</button>
+	<button onclick="Preset_ES4();">ES4</button>
+	<button onclick="Preset_ES4L();">ES4-L</button>
+	<button onclick="Preset_ES2Mod();">ES2Mod</button>
 </p>
 
 <noscript>This website (despite it's look) requires some very simple JavaScript which is embedded in this HTML.</noscript>
@@ -65,7 +66,7 @@
 		 滑板车将开启动能回收的速度（km / h）。（电机未激活时）<br />
 		 使用制动按钮时，车辆仍将进行动能回收。<br />
 		 如果不想使用动能回收，设置此项为40km/h<br />
-		<b><font color="red">关闭动能回收可能因快速的刹车导致控制板失效和受伤。</font></b>
+		<b><font color="red">关闭动能回收可能因快速的刹车导致控制板失效和受伤。</font></b> <a href="https://www.scooterhacking.org/forum/viewtopic.php?f=4&t=118">(...)</a>
     </p></li>
 
     <li><p>
@@ -104,8 +105,7 @@
         版本号:
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
-		设置较高的版本号以避免被官方app自动升级 <br />
-        <i>只能运行在1.3.x</i>
+		设置较高的版本号以避免被官方app自动升级 <b> <font color="blue">更新后的版本!</font></b>
     </p></li>
 
     <li><p>
@@ -126,9 +126,16 @@
 
     <li><p>
     <label>解除锁定状态下的自动关机:
-    <input type="checkbox" name="stay_on_locked" disabled="disabled"></label><br />
-	取消滑板车锁定时的自动关机。<b> <font color="orange">新!</font></b>
+    <input type="checkbox" name="stay_on_locked"></label><br />
+	取消滑板车锁定时的自动关机。<b> <font color="blue">更新后的版本!</font></b>
     </p></li>  
+	
+	<li><p>
+    删除充电模式:
+    <input type="checkbox" name="remove_charging_mode">
+    <br>
+    ESC将忽略来自充电线的输入，踏板车将在充电期间可骑行。 适用于非官方外置电池。
+    </p></li>
 	
 	<li>
     <label>将ESC <-> BMS波特率更改为76800:

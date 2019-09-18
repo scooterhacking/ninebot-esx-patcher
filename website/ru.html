@@ -32,8 +32,9 @@
 <p>
     Предвадительная установка:
     <button onclick="Preset_Default();">По Умолчанию</button>
-	<button onclick="Preset_SH();">SH</button>
-	<button onclick="Preset_Sport();">Sport</button>
+	<button onclick="Preset_ES4();">ES4</button>
+	<button onclick="Preset_ES4L();">ES4-L</button>
+	<button onclick="Preset_ES2Mod();">ES2Mod</button>
 </p>
 
 <noscript>This website (despite it's look) requires some very simple JavaScript which is embedded in this HTML.</noscript>
@@ -63,7 +64,7 @@
         Скорость в км/ч, при которой самокат начнет торможение самостоятельно, когда двигатель не активен.<br />
 		Вы все еще будете иметь рекуперативное торможение при использовании тормоза.<br />
 		Если вы хотите отключить Рекуперативное торможение, просто поставьте 40 км/ч.<br />
-		<b><font color="red">Отключение KERS может привести к неисправности платы управления и травмам персонала, вызванным сильным торможением.</b></font>
+		<b><font color="red">Отключение KERS может привести к неисправности платы управления и травмам персонала, вызванным сильным торможением.</b></font> <a href="https://www.scooterhacking.org/forum/viewtopic.php?f=4&t=118">(...)</a>
     </p></li>
 	
     <li><p>
@@ -102,8 +103,7 @@
         Имитация версии прошивки:
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
-        Делает номер версии выше, чтобы предотвратить обновления из приложения Ninebot. <br />
-        <i>Работает только на 1.3.x</i>
+        Делает номер версии выше, чтобы предотвратить обновления из приложения Ninebot. <b> <font color="blue">обновленный!</font></b>
     </p></li>
 	
     <li><p>
@@ -124,9 +124,16 @@
 
     <li><p>
     <label>Оставайтесь на связи, когда скутер заблокирован:
-    <input type="checkbox" name="stay_on_locked" disabled="disabled"></label><br />
-    Отключите автоматическое отключение, когда самокат заблокирован, чтобы он всегда оставался включенным<b> <font color="orange">Новое!</font></b>
+    <input type="checkbox" name="stay_on_locked"></label><br />
+    Отключите автоматическое отключение, когда самокат заблокирован, чтобы он всегда оставался включенным<b> <font color="blue">обновленный!</font></b>
     </p></li> 
+	
+    <li><p>
+    Отключить режим зарядки:
+    <input type="checkbox" name="remove_charging_mode">
+    <br>
+    Исправляет баг, при котором дополнительная батарея начинает заряжать самокат (при параллельном соединении с основной).
+    </p></li>
 	
 	<li>
     <label>Изменить скорость обмена данными с BMS на значение 76800:

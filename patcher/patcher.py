@@ -266,7 +266,13 @@ class FirmwarePatcher():
         post = bytes(self.ks.asm('NOP;NOP')[0])
         self.data[ofs:ofs+4] = post
         return [(ofs, pre, post)]
-
+    def remove_charging_mode(self):
+        sig = [0x20, 0xB1, 0x84, 0xF8, 0x38, 0x60, 0xE0, 0x7B, 0x18, 0xB1]
+        ofs = FindPattern(self.data, sig)
+        pre = self.data[ofs:ofs+2]
+        post = bytes(self.ks.asm('NOP')[0])
+        self.data[ofs:ofs+2] = post
+        return [(ofs, pre, post)]
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)

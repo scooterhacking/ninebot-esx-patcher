@@ -7,6 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="/static/favicon.png">
 <link rel="stylesheet" type="text/css" href="/static/style.css">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140520207-1"></script>
 <title>Ninebot ES/SNSC Custom Firmware Toolkit</title>
 </head>
 
@@ -31,8 +34,9 @@
 <p>
     Presets:
     <button onclick="Preset_Default();">Default</button>
-	<button onclick="Preset_SH();">SH</button>
-	<button onclick="Preset_Sport();">Sport</button>
+	<button onclick="Preset_ES4();">ES4</button>
+	<button onclick="Preset_ES4L();">ES4-L</button>
+	<button onclick="Preset_ES2Mod();">ES2Mod</button>
 </p>
 
 <noscript>This website (despite it's look) requires some very simple JavaScript which is embedded in this HTML.</noscript>
@@ -62,7 +66,7 @@
         Speed in km/h at which the scooter will start braking on it's own when the motor is not active.<br />
 		You will still have recuperative braking when using the brake lever.<br />
 		If you want "KERS OFF" then just put this to 40km/h.<br />
-		<b><font color="red">Disabling KERS might result in failure of the control board and in injuries caused by strong braking.</font></b>
+		<b><font color="red">Disabling KERS might result in failure of the control board and in injuries caused by strong braking.</font></b> <a href="https://www.scooterhacking.org/forum/viewtopic.php?f=4&t=118">(...)</a>
     </p></li>
 	
     <li><p>
@@ -101,8 +105,7 @@
         Version spoofing:
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
-        Makes the version number higher to prevent updates from the Ninebot app. <br />
-        <i>Only works on 1.3.x</i>
+        Makes the version number higher to prevent updates from the Ninebot app. <b> <font color="blue">Updated!</font></b>
     </p></li>
 	
     <li><p>
@@ -123,9 +126,16 @@
 	
     <li><p>
     <label>Stay on when scooter is locked:
-    <input type="checkbox" name="stay_on_locked" disabled="disabled"></label><br />
-    Disables auto shutdown when the scooter is locked so it stays on forever.<b> <font color="orange">New!</font></b>
+    <input type="checkbox" name="stay_on_locked"></label><br />
+    Disables auto shutdown when the scooter is locked so it stays on forever.<b> <font color="blue">Updated!</font></b>
     </p></li>  
+	
+	<li><p>
+    Remove charging mode:
+    <input type="checkbox" name="remove_charging_mode">
+    <br>
+    ESC will ignore input from the charging line, scooter will be rideable during charge. Useful for non-official external batteries.
+    </p></li>
 	
 	<li>
     <label>Change ESC<->BMS baud rate to 76800:

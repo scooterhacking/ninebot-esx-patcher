@@ -54,6 +54,9 @@ def patch_firmware():
            patcher.kers_dividor_2()		
         if kers_dividor == 6:
            patcher.kers_dividor_6(version)
+        if kers_dividor == 12:
+           patcher.kers_dividor_6(version)
+           patcher.kers_dividor_2() 
 
     max_speed = flask.request.args.get('max_speed', None)
     if max_speed is not None:
@@ -71,6 +74,10 @@ def patch_firmware():
     stay_on_locked = flask.request.args.get('stay_on_locked', None)
     if stay_on_locked:
         patcher.stay_on_locked()
+
+    remove_charging_mode = flask.request.args.get('remove_charging_mode', None)
+    if remove_charging_mode:
+        patcher.remove_charging_mode()
 		
     bms_uart_76800 = flask.request.args.get('bms_uart_76800', None)
     if bms_uart_76800:
