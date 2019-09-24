@@ -55,6 +55,19 @@
     </p></li>
 
     <li><p>
+        Format de sortie:
+        <select name="output">
+            <option value="zip" selected>ZIP</option>
+            <option value="enc">Bin encodé</option>
+			<option value="bin">Bin</option>
+        </select>
+        <br>
+        Sélectionnez <b>ZIP</b> si vous souhaitez flasher avec <a href="https://sctrhck.ml/ninebotfun">NinebotFun</a> / <a href="https://sctrhck.ml/esdowng">ES DownG</a>.<br />
+		Sélectionnez <b>Encoded bin</b> si vous souhaitez flasher avec <a href="https://sctrhck.ml/ninebotflasher">Ninebot-Flasher</a> / py9b / NineRift.<br />
+        Sélectionnez <b>Bin</b> si vous savez ce que vous faitez. Ne flashez pas ce fichier.
+    </p></li>
+
+    <li><p>
         Vitesse minimum du KERS:
         <input name="kers_min_speed" type="number" step="1" min="0" max="100" value="6" disabled>
         <label><input type="checkbox" onchange="CheckForm('kers_min_speed', this);">Modifier?</label>

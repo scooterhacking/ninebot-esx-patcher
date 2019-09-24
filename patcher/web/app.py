@@ -109,38 +109,48 @@ def patch_firmware():
     if version_spoofing:
          patcher.version_spoofing(version)
 
+    output = flask.request.args.get('output', None)
+    if output == 'zip' or not output:
+        # make zip file for firmware
+        zip_buffer = io.BytesIO()
+        zip_file = zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False)
 
-    # make zip file for firmware
-    zip_buffer = io.BytesIO()
-    zip_file = zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False)
+        zip_file.writestr('FIRM.bin', patcher.data)
+        md5 = hashlib.md5()
+        md5.update(patcher.data)
 
-    zip_file.writestr('FIRM.bin', patcher.data)
-    md5 = hashlib.md5()
-    md5.update(patcher.data)
+        patcher.encrypt()
+        zip_file.writestr('FIRM.bin.enc', patcher.data)
+        md5e = hashlib.md5()
+        md5e.update(patcher.data)
 
-    patcher.encrypt()
-    zip_file.writestr('FIRM.bin.enc', patcher.data)
-    md5e = hashlib.md5()
-    md5e.update(patcher.data)
+        info_txt = 'dev: ES/SNSC;\nnam: {};\nenc: B;\ntyp: DRV;\nmd5: {};\nmd5e: {};\n'.format(
+            version, md5.hexdigest(), md5e.hexdigest())
 
-    info_txt = 'dev: ES/SNSC;\nnam: {};\nenc: B;\ntyp: DRV;\nmd5: {};\nmd5e: {};\n'.format(
-        version, md5.hexdigest(), md5e.hexdigest())
+        zip_file.writestr('info.txt', info_txt.encode())
+        message = "Downloaded from scooterhacking.org - Share this CFW with the following link : https://ninebot.scooterhacking.org"
+        request_url = flask.request.full_path.encode()
+        request_url = request_url.decode("utf-8").replace("cfw", "", 1).encode("utf-8")
+        zip_file.comment = bytes(message, 'utf-8') + request_url
+        zip_file.close()
+        zip_buffer.seek(0)
+        content = zip_buffer.getvalue()
+        zip_buffer.close()
 
-    zip_file.writestr('info.txt', info_txt.encode())
-    message = "Downloaded from scooterhacking.org - Share this CFW with the following link : https://ninebot.scooterhacking.org"
-    request_url = flask.request.full_path.encode()
-    request_url = request_url.decode("utf-8").replace("cfw", "", 1).encode("utf-8")
-    zip_file.comment = bytes(message, 'utf-8') + request_url
-    zip_file.close()
-    zip_buffer.seek(0)
-    content = zip_buffer.getvalue()
-    zip_buffer.close()
-
-    resp = flask.Response(content)
-    filename = version + '-' + str(int(time.time())) + '.zip'
-    resp.headers['Content-Type'] = 'application/zip'
-    resp.headers['Content-Disposition'] = 'inline; filename="{0}"'.format(filename)
-    resp.headers['Content-Length'] = len(content)
+        resp = flask.Response(content)
+        filename = version + '-' + str(int(time.time())) + '.zip'
+        resp.headers['Content-Type'] = 'application/zip'
+        resp.headers['Content-Disposition'] = 'inline; filename="{0}"'.format(filename)
+        resp.headers['Content-Length'] = len(content)
+    if output == 'bin' or output == 'enc':
+        filename = version + '-' + str(int(time.time())) + '.bin'
+        if output == 'enc':
+            patcher.encrypt()
+            filename += '.enc'
+        resp = flask.Response(patcher.data)
+        resp.headers['Content-Type'] = 'application/octet-stream'
+        resp.headers['Content-Disposition'] = 'inline; filename="{0}"'.format(filename)
+        resp.headers['Content-Length'] = len(patcher.data)
 
     return resp
 
