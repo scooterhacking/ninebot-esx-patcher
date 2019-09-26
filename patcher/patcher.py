@@ -273,6 +273,14 @@ class FirmwarePatcher():
         post = bytes(self.ks.asm('NOP')[0])
         self.data[ofs:ofs+2] = post
         return [(ofs, pre, post)]
+        #@author : Lothean, syokat
+    def swd_enable(self):
+        sig = [0x00, 0x00, 0xFF, 0xFF, 0x0F, 0x00, 0x00, 0x20, 0x02, 0x40, 0x08, 0x49, 0x04, 0x20]
+        ofs = FindPattern(self.data, sig) + 12
+        pre = self.data[ofs:ofs+2]
+        post = bytes(self.ks.asm('MOVS R0, #{:n}'.format(1))[0])
+        self.data[ofs:ofs+2] = post
+        return [(ofs, pre, post)]
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)

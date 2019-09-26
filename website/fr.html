@@ -13,7 +13,7 @@
 <body>
 
 <div class="header">
-	<a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Retourner vers ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Rejoindre le serveur Discord"></a> 
+	<a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Retourner vers ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Rejoindre le serveur Discord"></a>   <a href="https://sctrhck.ml/tgchat"><img src="/static/telegram.png" height="34" hspace="10" alt="Join us on Telegram"></a>  
     <h1>Générateur de custom firmware pour Ninebot ES/SNSC</h1>
 	<a href="/"><img src="/static/us-icon.png" /></a> - <b>[<a href="/fr"><img src="/static/fr-icon.png" /></a>]</b> - <a href="/ru"><img src="/static/ru-icon.png" /></a> - <a href="/cn"><img src="/static/cn-icon.png" /></a>
 </div>
@@ -63,8 +63,8 @@
         </select>
         <br>
         Sélectionnez <b>ZIP</b> si vous souhaitez flasher avec <a href="https://sctrhck.ml/ninebotfun">NinebotFun</a> / <a href="https://sctrhck.ml/esdowng">ES DownG</a>.<br />
-		Sélectionnez <b>Encoded bin</b> si vous souhaitez flasher avec <a href="https://sctrhck.ml/ninebotflasher">Ninebot-Flasher</a> / py9b / NineRift.<br />
-        Sélectionnez <b>Bin</b> si vous savez ce que vous faitez. Ne flashez pas ce fichier.
+		Sélectionnez <b>Bin encodé</b> si vous souhaitez flasher avec <a href="https://sctrhck.ml/ninebotflasher">Ninebot-Flasher</a> / py9b / NineRift.<br />
+        Sélectionnez <b>Bin</b> si vous savez ce que vous faites. Ne flashez pas ce fichier.
     </p></li>
 
     <li><p>
@@ -117,11 +117,20 @@
         Change le numéro de version dans l'application Ninebot pour éviter l'écrasement du CFW. <b> <font color="blue">Mis à jour!</font></b>
     </p></li>
 	
+   <li><p>
+        Activer le SWD:
+        <label><input type="checkbox" name="swd_enable"></label>
+        <br>
+        Activer l'interface SWD, permettant le débuggage en temps réel avec ST-Link. <b> <font color="orange">En test!</font></b>
+    </p></li>
+
+
     <li><p>
-        Algorithme d'accélération alternatif:
+        Alrogithme d'accélération basé sur la puissance:
         <label><input type="checkbox" name="throttle_alg"></label>
         <br>
-        Utilisez l'algorithme d'accélération alternatif, change la manière dont la gâchette réagit.
+        La position de la gâchette d'accélération sera proportionnelle à la puissance plutôt que d'être poportionnelle à la vittesse.<br />
+        La vitesse maximum n'est pas applicable dans ce mode.
     </p></li>
 	
     <li><p>

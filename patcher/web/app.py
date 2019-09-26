@@ -78,6 +78,10 @@ def patch_firmware():
     remove_charging_mode = flask.request.args.get('remove_charging_mode', None)
     if remove_charging_mode:
         patcher.remove_charging_mode()
+
+    swd_enable = flask.request.args.get('swd_enable', None)
+    if swd_enable:
+        patcher.swd_enable()
 		
     bms_uart_76800 = flask.request.args.get('bms_uart_76800', None)
     if bms_uart_76800:

@@ -11,7 +11,8 @@
         "MOTOR_START_SPEED": "motor_start_speed",
 		"REMOVE_CHARGING_MODE": "remove_charging_mode",
         "STAY_ON_LOCKED": "stay_on_locked",
-        "BMS_UART_76800":"bms_uart_76800"
+        "BMS_UART_76800":"bms_uart_76800",
+        "SWD_ENABLE":"swd_enable"
     };
 
     var formValues = Object.values(forms);
@@ -95,6 +96,7 @@
         ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
         ChangeForm(forms.STAY_ON_LOCKED, false);
         ChangeForm(forms.BMS_UART_76800, false);
+        ChangeForm(forms.SWD_ENABLE, false);
     }
     function Preset_ES4() {
         ChangeForm(forms.VERSION, "DRV151");
@@ -109,6 +111,7 @@
         ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
         ChangeForm(forms.STAY_ON_LOCKED, true);
         ChangeForm(forms.BMS_UART_76800, false);
+        ChangeForm(forms.SWD_ENABLE, false);
     }
     function Preset_ES4L() {
         ChangeForm(forms.VERSION, "DRV151");
@@ -123,6 +126,7 @@
         ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
         ChangeForm(forms.STAY_ON_LOCKED, true);
         ChangeForm(forms.BMS_UART_76800, false);
+        ChangeForm(forms.SWD_ENABLE, false);
     }
     function Preset_ES2Mod() {
         ChangeForm(forms.VERSION, "DRV139");
@@ -137,6 +141,7 @@
         ChangeForm(forms.WHEEL_SPEED_CONST, "390", false);
         ChangeForm(forms.STAY_ON_LOCKED, true);
         ChangeForm(forms.BMS_UART_76800, false);
+        ChangeForm(forms.SWD_ENABLE, false);
     }
     function Share() {
         var url = location.protocol + '//' + location.host;

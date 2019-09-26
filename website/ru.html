@@ -13,7 +13,7 @@
 <body>
 
 <div class="header">
-		<a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Return to ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Join our Discord server"></a> 
+		<a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Return to ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Join our Discord server"></a>    <a href="https://sctrhck.ml/tgchat"><img src="/static/telegram.png" height="34" hspace="10" alt="Join us on Telegram"></a> 
     <h1>Ninebot ES/SNSC Конструктор прошивок контроллера</h1>
 	<a href="/"><img src="/static/us-icon.png" /></a> - <a href="/fr"><img src="/static/fr-icon.png" /></a> - <b>[<a href="/ru"><img src="/static/ru-icon.png" /></a>]</b> - <a href="/cn"><img src="/static/cn-icon.png" /></a>
 </div>
@@ -55,6 +55,20 @@
         рекомендуется использовать прошивку версии 1.3+ потому что вам, скорее всего, не придется понижать BMS.<br />
 		<!--<i>Версии прошивки, помеченные <b>(!)</b> mогут не поддерживать исправления.</i>-->
     </p></li>
+	
+    <li><p>
+        Формат выходного файла:
+        <select name="output">
+            <option value="zip" selected>ZIP</option>
+            <option value="enc">.enc</option>
+			<option value="bin">.bin</option>
+        </select>
+        <br>
+        Выберите <b>ZIP</b>, если хотите прошить, используя <a href="https://sctrhck.ml/ninebotfun">NinebotFun</a> / <a href="https://sctrhck.ml/esdowng">ES DownG</a>.<br />
+		Выберите <b>.enc</b>, если хотите прошить, используя <a href="https://sctrhck.ml/ninebotflasher">Ninebot-Flasher</a> / py9b / NineRift.<br />
+        Выберите <b>.bin</b>, если вы эксперт. Не прошивайте этот файл.
+    </p></li>
+
 
     <li><p>
         Минимальная скорость Рекуперативного торможения:
@@ -106,11 +120,19 @@
         Делает номер версии выше, чтобы предотвратить обновления из приложения Ninebot. <b> <font color="blue">обновленный!</font></b>
     </p></li>
 	
+   <li><p>
+        Включить SWD:
+        <label><input type="checkbox" name="swd_enable"></label>
+        <br>
+        Включает интерфейс SWD, позволяющий отладку в реальном времени с использованием ST-Link. <b> <font color="orange">тестирование!</font></b>
+    </p></li>
+
+    
     <li><p>
-        Альтернативный алгоритм ускорения.
+        Активировать алгоритм управления током.
         <label><input type="checkbox" name="throttle_alg"></label>
         <br>
-        Использует альтернативный алгоритм ускорения.
+        Ограничение скоростей во всех режимах так же не применимо к этому патчу.
     </p></li>
 	
     <li><p>

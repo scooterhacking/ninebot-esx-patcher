@@ -7,12 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="/static/favicon.png">
 <link rel="stylesheet" type="text/css" href="/static/style.css">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<title>Ninebot ES/SNSC Custom Firmware Toolkit</title>
 </head>
 
 <body>
 
 <div class="header">
-	<a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Return to ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Join our Discord server"></a> 
+	<a href="https://www.scooterhacking.org"><img src="/static/back.png" width="33" height="33" hspace="10" alt="Return to ScooterHacking.org"></a>  <a href="https://sctrhck.ml/discord"><img src="/static/discord.png" width="105" height="33" hspace="10" alt="Join our Discord server"></a>   <a href="https://sctrhck.ml/tgchat"><img src="/static/telegram.png" height="34" hspace="10" alt="Join us on Telegram"></a> 
     <h1>Ninebot ES/SNSC Custom Firmware Toolkit</h1>
 	<b>[<a href="/"><img src="/static/us-icon.png" /></a>]</b> - <a href="/fr"><img src="/static/fr-icon.png" /></a> - <a href="/ru"><img src="/static/ru-icon.png" /></a> - <a href="/cn"><img src="/static/cn-icon.png" /></a>
 	</div>
@@ -116,12 +118,20 @@
         <br>
         Makes the version number higher to prevent updates from the Ninebot app. <b> <font color="blue">Updated!</font></b>
     </p></li>
-	
+
+   <li><p>
+        Enable SWD:
+        <label><input type="checkbox" name="swd_enable"></label>
+        <br>
+        Enables the SWD interface, allowing real-time debugging using ST-Link. <b> <font color="orange">Testing!</font></b>
+    </p></li>
+
     <li><p>
-        Alternative throttle algorithm:
+        Current-based throttle algorithm:
         <label><input type="checkbox" name="throttle_alg"></label>
         <br>
-        Uses the alternative throttle algorithm. 
+        Instead of speed-based, the throttle will work on a power-based algorithm (like in a thermal engine vehicle).<br />
+        Max speed is ignored if you enable this.
     </p></li>
 	
     <li><p>
