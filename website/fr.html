@@ -110,13 +110,13 @@
         Vitesse minimum en km/h avant que le moteur fonctionne. 
     </p></li>
 	
-    <li><p>
+     <li><p>
         Changement de version:
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
-        Change le numéro de version dans l'application Ninebot pour éviter l'écrasement du CFW. <b> <font color="blue">Mis à jour!</font></b>
+        Change le numéro de version dans l'application Ninebot pour éviter l'écrasement du CFW.
     </p></li>
-	
+    
    <li><p>
         Activer le SWD:
         <label><input type="checkbox" name="swd_enable"></label>
@@ -124,6 +124,13 @@
         Activer l'interface SWD, permettant le débuggage en temps réel avec ST-Link. <b> <font color="orange">En test!</font></b>
     </p></li>
 
+   <li><p>
+        Support des batteries universelles:
+        <label><input type="checkbox" name="bypass_BMS"></label>
+        <br>
+        Permet à la trottinette de fonctionner sans BMS Ninebot. <b><font color="red">Expérimental!</font></b><br />
+        <i>Avertissement: la trottinette ne donnera pas d'informations sur l'état, la tension et la charge de la batterie.</i>
+    </p></li>
 
     <li><p>
         Alrogithme d'accélération basé sur la puissance:
@@ -132,7 +139,7 @@
         La position de la gâchette d'accélération sera proportionnelle à la puissance plutôt que d'être poportionnelle à la vittesse.<br />
         La vitesse maximum n'est pas applicable dans ce mode.
     </p></li>
-	
+    
     <li><p>
         Constante de puissance moteur:
         <input name="motor_power_constant" type="number" step="1" min="40000" max="65535" value="51575" disabled>
@@ -145,8 +152,8 @@
     <li><p>
     <label>Maintenir la trottinette allumée lorsqu'elle est verouillée:
     <input type="checkbox" name="stay_on_locked"></label><br />
-    La trottinette ne s'éteindra jamais si elle est verrouillée.<b> <font color="blue">Mis à jour!</font></b>
-    </p></li> 	
+    La trottinette ne s'éteindra jamais si elle est verrouillée.
+    </p></li> 
 	
     <li><p>
     Ignorer l'état du chargeur:

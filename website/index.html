@@ -116,7 +116,7 @@
         Version spoofing:
         <label><input type="checkbox" name="version_spoofing"></label>
         <br>
-        Makes the version number higher to prevent updates from the Ninebot app. <b> <font color="blue">Updated!</font></b>
+        Makes the version number higher to prevent updates from the Ninebot app. 
     </p></li>
 
    <li><p>
@@ -126,6 +126,14 @@
         Enables the SWD interface, allowing real-time debugging using ST-Link. <b> <font color="orange">Testing!</font></b>
     </p></li>
 
+   <li><p>
+        Bypass Ninebot BMS requirement:
+        <label><input type="checkbox" name="bypass_BMS"></label>
+        <br>
+        Allows the scooter to run on any battery without the need of a Ninebot BMS. <b><font color="red">Experimental!</font></b><br />
+        <i>Warning: the scooter won't provide any info on the current battery state, voltage, or remaining capacity.</i>
+    </p></li>
+
     <li><p>
         Current-based throttle algorithm:
         <label><input type="checkbox" name="throttle_alg"></label>
@@ -133,7 +141,7 @@
         Instead of speed-based, the throttle will work on a power-based algorithm (like in a thermal engine vehicle).<br />
         Max speed is ignored if you enable this.
     </p></li>
-	
+    
     <li><p>
         Motor power constant:
         <input name="motor_power_constant" type="number" step="1" min="40000" max="65535" value="51575" disabled>
@@ -142,11 +150,11 @@
         Lower = More power. Too much power is not recommended for battery and motor life.<br>
         <b><font color="red">Modifying this value without knowing what you're doing will surely break your scooter.</font></b>
     </p></li>
-	
+    
     <li><p>
     <label>Stay on when scooter is locked:
     <input type="checkbox" name="stay_on_locked"></label><br />
-    Disables auto shutdown when the scooter is locked so it stays on forever.<b> <font color="blue">Updated!</font></b>
+    Disables auto shutdown when the scooter is locked so it stays on forever.
     </p></li>  
 	
 	<li><p>

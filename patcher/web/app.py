@@ -82,6 +82,10 @@ def patch_firmware():
     swd_enable = flask.request.args.get('swd_enable', None)
     if swd_enable:
         patcher.swd_enable()
+
+    bypass_BMS = flask.request.args.get('bypass_BMS', None)
+    if bypass_BMS:
+        patcher.bypass_BMS()
 		
     bms_uart_76800 = flask.request.args.get('bms_uart_76800', None)
     if bms_uart_76800:

@@ -281,6 +281,14 @@ class FirmwarePatcher():
         post = bytes(self.ks.asm('MOVS R0, #{:n}'.format(1))[0])
         self.data[ofs:ofs+2] = post
         return [(ofs, pre, post)]
+    #@author : majsi, Lothean
+    def bypass_BMS(self):
+        sig = [0x06, 0x49, 0x4A, 0x78, 0x82, 0x42, 0x02, 0xD8, 0x4A, 0x78]
+        ofs = FindPattern(self.data, sig)
+        pre = self.data[ofs:ofs+2]
+        post = bytes(self.ks.asm('BX LR')[0])
+        self.data[ofs:ofs+2] = post
+        return [(ofs, pre, post)]
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
