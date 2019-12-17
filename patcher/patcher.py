@@ -74,26 +74,26 @@ class FirmwarePatcher():
     def encrypt(self):
         self.data = XiaoTea.XiaoTea().encrypt(self.data)
     #@author : ScooterHacking
-    def version_spoofing(self, DRV_version):
-        if DRV_version == "DRV133" or DRV_version == "DRV139" or DRV_version == "DRV151":
-            val = b'\x50'
-            sig = [0x74, 0x01, 0x40, 0xF2, None, 0x10]
-            ofs = FindPattern(self.data, sig) + 5
-            pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
-            return [(ofs, pre, post)]
-        if DRV_version == "DRV120":
-            sig = [0x4F, 0xF4, 0x90, 0x70, 0xA0, 0x86]
+    def version_spoofing(self):
+        if ((self.data[0x7844] == 0xA0) and (self.data[0x7845] == 0x86) and (self.data[0x7842] == 0x90)):
+            sig = [0x4F, 0xF4, 0x90, 0x70, 0xA0, 0x86, 0x16, 0x48, 0x00]
             ofs = FindPattern(self.data, sig)
             pre = self.data[ofs:ofs+4]
             post = bytes(self.ks.asm('MOV.W   R0, #0x520')[0])
             self.data[ofs:ofs+4] = post
             return [(ofs, pre, post)]
-        if DRV_version == "DRV150":
+        if ((self.data[0x80D4] == 0xA0) and (self.data[0x80D5] == 0x86) and (self.data[0x80D2] == 0x90)):
             sig = [0x4F, 0xF4, 0xA8, 0x70, 0xA0, 0x86]
             ofs = FindPattern(self.data, sig)
             pre = self.data[ofs:ofs+4]
             post = bytes(self.ks.asm('MOV.W   R0, #0x550')[0])
             self.data[ofs:ofs+4] = post
+            return [(ofs, pre, post)]
+        if ((self.data[0x7BAA] == 0x33) or (self.data[0x80D6] == 0x51) or (self.data[0x80F2] == 0x39)):
+            val = b'\x50'
+            sig = [0x74, 0x01, 0x40, 0xF2, None, 0x10]
+            ofs = FindPattern(self.data, sig) + 5
+            pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
             return [(ofs, pre, post)]
     #@author : majsi
     def kers_min_speed(self, kmh):
@@ -123,8 +123,8 @@ class FirmwarePatcher():
         pre, post = PatchImm(self.data, ofs, 2, val, MOVS_T1_IMM)
         return [(ofs, pre, post)]
     #@author : majsi
-    def kers_dividor_6(self, DRV_version):
-        if DRV_version != "DRV147" and DRV_version != "DRV150" and DRV_version != "DRV151":
+    def kers_dividor_6(self):
+        if ((self.data[0x80D6] != 0x51) and not (self.data[0x80D4] == 0xA0 and self.data[0x80D5] == 0x86 and self.data[0x80D2] == 0x90)):
             sig = [0x00, 0xEB, 0x40, 0x00, 0x40, 0x00, None, None, 0x00, 0xEB, 0x40, 0x00]
         else:
             sig = [0x00, 0xEB, 0x80, 0x00, 0x40, 0x00, 0xA4, 0xF8, 0x7C, 0x00, 0x13, 0x48]

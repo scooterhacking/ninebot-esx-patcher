@@ -53,9 +53,9 @@ def patch_firmware():
         if kers_dividor == 2:
            patcher.kers_dividor_2()		
         if kers_dividor == 6:
-           patcher.kers_dividor_6(version)
+           patcher.kers_dividor_6()
         if kers_dividor == 12:
-           patcher.kers_dividor_6(version)
+           patcher.kers_dividor_6()
            patcher.kers_dividor_2() 
 
     max_speed = flask.request.args.get('max_speed', None)
@@ -115,7 +115,7 @@ def patch_firmware():
 
     version_spoofing = flask.request.args.get('version_spoofing', None)
     if version_spoofing:
-         patcher.version_spoofing(version)
+         patcher.version_spoofing()
 
     output = flask.request.args.get('output', None)
     if output == 'zip' or not output:
